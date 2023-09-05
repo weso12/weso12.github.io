@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<style>
+	input.number{
+		width:  35px;
+	}
+</style>
+<input type="checkbox" id="basicfiltering" name="basicfiltering" checked><label for="basicfiltering" >Basic Filtering</label>
+<br>
+<input type="checkbox" id="maxlevel1skillranks" name="maxlevel1skillranks" checked><label for="maxlevel1skillranks">Max Level 1 Skill Ranks</label>
+<br>
+<input type="checkbox" id="allowaquaticanimals" name="allowaquaticanimals"><label for="allowaquaticanimals">Allow Aquatic Animals as Animal Companions</label>
+<br>
+<input type="number" id="godlessCleric" name ="godlessCleric" value="10" min="0" max="100" size="4"><label for="godlessCleric">% of Godless Clerics</label>
+<br>
+<input type="number" id="LiterateBarbarians" name ="LiterateBarbarians" value="10" min="0" max="100" size="4"><label for="LiterateBarbarians">% of Literate Barbarian</label>
+<br>
+<input type="number" id="specialistWizards" name="specialistWizards" value="50" min="0" max="100" size="4"><label for="specialistWizards">% of Specialist Wizards</label>
+<br>
+<input type="number" id="classSkillWeight" name="classSkillWeight" value="4" min="0" size="3"><label for="classSkillWeight">Class Skill Weight</label>
+<br>
+<input type="number" id="crossClassSkillWeight" name="crossClassSkillWeight" value="1" min="0" size="3"><label for="crossClassSkillWeight">Cross-Class Skill Weight</label>
+<br>
+<button onclick="generateCharacter()">Generate Character</button>
+<span id = "CharacterInfo"></span>
+<script type="text/javascript" src="./classData.js"></script>
+<script type="text/javascript" src="./createCharacter.js"></script>
+<script type="text/javascript" src="./domainData.js"></script>
+<script type="text/javascript" src="./featData.js"></script>
+<script type="text/javascript" src="./functions.js"></script>
+<script type="text/javascript" src="./godData.js"></script>
+<script type="text/javascript" src="./languageData.js"></script>
+<script type="text/javascript" src="./raceData.js"></script>
+<script type="text/javascript" src="./skillData.js"></script>
+<script type="text/javascript" src="./spellData.js"></script>
+<script type="text/javascript" src="./weaponData.js"></script>
+</body>
+</html>
