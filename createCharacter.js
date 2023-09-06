@@ -777,7 +777,6 @@
 				let knowledgeNameCell = document.createElement("TD")
 				knowledgeNameCell.style.border = "1px solid black"
 				knowledgeNameCell.style.borderCollapse = "collapse"
-				console.log(knowledgeInclusionArray)
 				if (knowledgeInclusionArray.length === 0){
 					knowledgeNameCell.appendChild(document.createTextNode("Knowledge (all)"))
 				}
