@@ -76,12 +76,28 @@
 			&& classData[characterInfo.class].fullCaster && characterInfo[classData[characterInfo.class].castingAttribute.toLowerCase()] < 10) &&
 			(characterInfo.class !== "Cleric" || !document.getElementById("basicfiltering").checked || calculateModifer(characterInfo.charisma) > -3)){
 			var numbers = [0, 1, 2, 3, 4, 5]
-			characterInfo.strength = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
-			characterInfo.dexterity = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
-			characterInfo.constitution = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
-			characterInfo.intelligence = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
-			characterInfo.wisdom = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
-			characterInfo.charisma = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
+			if (document.getElementById("weighattributes").checked){
+				array.sort(function(a,b){return b-a})
+				let attributeWeightArray = []
+				for (var property in classData[characterInfo.class].attributeWeights){
+					for (var i = 0; i < classData[characterInfo.class].attributeWeights[property]; i++){
+						attributeWeightArray.push(property)
+					}
+				}
+				for (var i = 0; i < 6; i++){
+					let rolledAttribute = attributeWeightArray[Math.floor(Math.random() * attributeWeightArray.length)]
+					characterInfo[rolledAttribute] = array[i]
+					attributeWeightArray = attributeWeightArray.filter(a => a !== rolledAttribute)
+				}
+			}
+			else {
+				characterInfo.strength = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
+				characterInfo.dexterity = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
+				characterInfo.constitution = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
+				characterInfo.intelligence = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
+				characterInfo.wisdom = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
+				characterInfo.charisma = array[numbers.splice(Math.floor(Math.random() * numbers.length), 1)[0]]
+			}
 			characterInfo.strength += raceData[characterInfo.race].attributeMods.Strength
 			characterInfo.dexterity += raceData[characterInfo.race].attributeMods.Dexterity
 			characterInfo.constitution += raceData[characterInfo.race].attributeMods.Constitution
