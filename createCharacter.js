@@ -1071,6 +1071,7 @@
 				skillModTotalCell.style.border = "1px solid black"
 				skillModTotalCell.style.borderCollapse = "collapse"
 				skillModTotalCell.style.textAlign = "center"
+				skillModTotalCell.style.fontWeight = "bold"
 				skillModTotalCell.appendChild(document.createTextNode("N/A"))
 				skillRow.appendChild(skillModTotalCell)
 				table.appendChild(skillRow)
