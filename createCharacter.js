@@ -719,7 +719,7 @@
 		let knowledgeClassSkillsNoRanksOrBonuses = 0;
 		let knowledgeCrossClassSkillsNoRanksOrBonuses = 0
 		for (var property in skillData){
-			if (property.startsWith("Knowledge") && (characterInfo.skillRanks[property] && characterInfo.skillRanks[property] > 0) || (characterInfo.skillBonuses[property] && characterInfo.skillBonuses[property] !== 0)){
+			if (property.startsWith("Knowledge") && ((characterInfo.skillRanks[property] && characterInfo.skillRanks[property] > 0) || (characterInfo.skillBonuses[property] && characterInfo.skillBonuses[property] !== 0))){
 				knowledgeInclusionArray.push(property)
 			}
 			else if (property.startsWith("Knowledge") && characterInfo.classSkills.includes(property)){
@@ -777,6 +777,7 @@
 				let knowledgeNameCell = document.createElement("TD")
 				knowledgeNameCell.style.border = "1px solid black"
 				knowledgeNameCell.style.borderCollapse = "collapse"
+				console.log(knowledgeInclusionArray)
 				if (knowledgeInclusionArray.length === 0){
 					knowledgeNameCell.appendChild(document.createTextNode("Knowledge (all)"))
 				}
