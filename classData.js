@@ -22,6 +22,14 @@
 			reflexSave: "Poor",
 			willSave: "Poor",
 			hasAlignmentRestrictions: true,
+			attributeWeights: {
+				strength: 16,
+				dexterity: 6,
+				constitution: 16,
+				intelligence: 2,
+				wisdom: 3,
+				charisma:2
+			},
 			allowedAlignments: ["Neutral Good", "Chaotic Good", "Neutral", "Chaotic Neutral", "Neutral Evil", "Chaotic Evil"],
 			assignClassFeatures: [
 				null,
@@ -77,6 +85,14 @@
 			fortitudeSave: "Poor",
 			reflexSave: "Good",
 			willSave: "Good",
+			attributeWeights: {
+				strength: 5,
+				dexterity: 7,
+				constitution: 7,
+				intelligence: 7,
+				wisdom: 3,
+				charisma: 84
+			},
 			hasAlignmentRestrictions: true,
 			allowedAlignments: ["Neutral Good", "Chaotic Good", "Neutral", "Chaotic Neutral", "Neutral Evil", "Chaotic Evil"],
 			assignClassFeatures: [
@@ -155,6 +171,14 @@
 			fortitudeSave: "Good",
 			reflexSave: "Poor",
 			willSave: "Good",
+			attributeWeights: {
+				strength: 6,
+				dexterity: 2,
+				constitution: 5,
+				intelligence: 1,
+				wisdom: 33,
+				charisma: 8
+			},
 			assignClassFeatures: [
 				null,
 				function(characterInfo){
@@ -326,6 +350,14 @@
 			 	shields: true,
 			 	towerShields: false
 			},
+			attributeWeights: {
+				strength: 4,
+				dexterity: 4,
+				constitution: 6,
+				intelligence: 1,
+				wisdom: 48,
+				charisma: 1
+			},
 			spellList: [["Create Water", "Cure Minor Wounds", "Detect Magic", "Detect Poison", "Flare", "Guidance", "Know Direction", "Light", "Mending",
 			"Purify Food and Drink", "Read Magic", "Resistance", "Virtue"],
 			["Calm Animals", "Charm Animal", "Cure Light Wounds", "Detect Animals or Plants", "Detect Snares and Pits", "Endure Elements", "Entangle",
@@ -473,18 +505,18 @@
 				shields: true,
 				towerShields: true
 			},
+			attributeWeights: {
+				strength: 10,
+				dexterity: 7,
+				constitution: 9,
+				wisdom:4,
+				intelligence: 3,
+				charisma: 2
+			},
 			baseAttackBonus: "Good",
 			fortitudeSave: "Good",
 			reflexSave: "Poor",
 			willSave: "Poor",
-			statWeights: {
-				strength: 10,
-				dexterity: 6,
-				constitution: 8,
-				intelligence: 2,
-				wisdom: 3,
-				charisma: 1
-			},
 			hasAlignmentRestrictions: false,
 			classSkills: ["Climb", "Craft", "Handle Animal", "Intimidate", "Jump", "Ride", "Swim"],
 			assignClassFeatures: [
@@ -542,7 +574,7 @@
 			fortitudeSave: "Good",
 			reflexSave: "Good",
 			willSave: "Good",
-			statWeights: {
+			attributeWeights: {
 				strength: 6,
 				dexterity: 5,
 				constitution: 5,
@@ -601,6 +633,14 @@
 					characterInfo.features.push("Smite Evil 1/day")
 				}
 			],
+			attributeWeights: {
+				strength: 10,
+				dexterity: 1,
+				constitution: 7,
+				wisdom:4,
+				intelligence: 1,
+				charisma: 7
+			},
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4)  +Math.floor(Math.random() * 4) + 6) * 1000
 			}
@@ -633,7 +673,7 @@
 			fortitudeSave: "Good",
 			reflexSave: "Good",
 			willSave: "Poor",
-			statWeights: {
+			attributeWeights: {
 				strength: 5,
 				dexterity: 5,
 				constitution: 4,
@@ -686,6 +726,14 @@
 			reflexSave: "Good",
 			willSave: "Poor",
 			hasAlignmentRestrictions: false,
+			attributeWeights: {
+				strength: 3,
+				dexterity: 10,
+				constitution: 7,
+				intelligence: 7,
+				wisdom: 3,
+				charisma: 5
+			},
 			assignClassFeatures: [
 				null,
 				function(characterInfo){
@@ -734,6 +782,14 @@
 			reflexSave: "Poor",
 			willSave: "Good",
 			hasAlignmentRestrictions: false,
+			attributeWeights: {
+				strength: 1,
+				dexterity: 5,
+				constitution: 5,
+				intelligence: 2,
+				wisdom: 1,
+				charisma: 42
+			},
 			assignClassFeatures: [
 				null,
 				function(characterInfo){
@@ -805,6 +861,14 @@
 			reflexSave: "Poor",
 			willSave: "Good",
 			hasAlignmentRestrictions: false,
+			attributeWeights: {
+				strength: 1,
+				dexterity: 5,
+				constitution: 5,
+				intelligence: 42,
+				wisdom: 1,
+				charisma: 2
+			},
 			assignClassFeatures: [
 				null,
 				function(characterInfo){

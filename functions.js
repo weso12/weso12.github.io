@@ -3,12 +3,7 @@
 		for (var i = 0; i < 4; i++){
 			array.push(Math.floor(Math.random() * 6) + 1)
 		}
-		let smallest = 7;
-		for (var i = 0; i < array.length; i++){
-			if (smallest > array[i]){
-				smallest = array[i]
-			}
-		}
+		let smallest = Math.min(...array)
 		let sum = 0;
 		for (var i = 0; i < array.length; i++){
 			sum += array[i]

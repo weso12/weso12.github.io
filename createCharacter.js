@@ -2,7 +2,6 @@
 		//Roll Abillity Scores
 		while (true){
 			var array = []
-			var max = 0;
 			var modifierSum = 0;
 			for (var i = 0; i < 6; i++){
 				array.push(roll4d6b3())
@@ -24,20 +23,37 @@
 		characterInfo.class = ClassArray[Math.floor(Math.random() * ClassArray.length)]
 		characterInfo.race = RaceArray[Math.floor(Math.random() * RaceArray.length)]
 		//Assign and Adjust Ability Scores
-		characterInfo.strength = array[0]
-		characterInfo.dexterity = array[1]
-		characterInfo.constitution = array[2]
-		characterInfo.intelligence = array[3]
-		characterInfo.wisdom = array[4]
+		if (document.getElementById("weighattributes").checked){
+			array.sort(function(a,b){return b-a})
+			let attributeWeightArray = []
+			for (var property in classData[characterInfo.class].attributeWeights){
+				for (var i = 0; i < classData[characterInfo.class].attributeWeights[property]; i++){
+					attributeWeightArray.push(property)
+				}
+			}
+			for (var i = 0; i < 6; i++){
+				let rolledAttribute = attributeWeightArray[Math.floor(Math.random() * attributeWeightArray.length)]
+				characterInfo[rolledAttribute] = array[i]
+				attributeWeightArray = attributeWeightArray.filter(a => a !== rolledAttribute)
+			}
+		}
+		else {
+			characterInfo.strength = array[0]
+			characterInfo.dexterity = array[1]
+			characterInfo.constitution = array[2]
+			characterInfo.intelligence = array[3]
+			characterInfo.wisdom = array[4]
+			characterInfo.charisma = array[5]
+		}
 		characterInfo.numberOfFeatstoLearn = 1;
 		characterInfo.fighterBonusFeatsToLearn = 0;
-		characterInfo.charisma = array[5]
 		characterInfo.alignment = ""
 		characterInfo.features = [];
 		characterInfo.skillBonuses = {};
 		characterInfo.weaponProficiencies = {};
 		characterInfo.armorProficiencies = {};
 		characterInfo.featsKnown = [];
+		characterInfo.equipment = []
 		characterInfo.elligbleAlignments = ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil"]
 		//Raw Spells Known is used for like feat prerequistes and stuff to be easier to calculate.
 		characterInfo.rawSpellsKnown = []
