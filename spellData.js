@@ -5,7 +5,12 @@
 			descriptor: ["Acid"],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: "Close",
+			duration: "Instantaneous",
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Alarm": {
 			college: "Abjuration",
@@ -14,21 +19,40 @@
 			verbalComponent: true,
 			somaticComponent: true,
 			focusComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Close",
+			duration: 7200,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true,
+			canBeWiden: true
 		},
 		"Animate Rope": {
 			college: "Transmutation",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			duration: 6,
+			durationIsPerLevel: true,
+			range: "Medium",
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Arcane Mark": {
 			college: "Universal",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			duration: "Permanent",
+			range: 0,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Bane": {
 			college: "Enchantment",
@@ -39,7 +63,13 @@
 			object: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			duration: 60,
+			durationIsPerLevel: true,
+			empowerable: false,
+			range: 50,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Bless": {
 			college: "Enchantment",
@@ -48,9 +78,16 @@
 			spellResistance: true,
 			harmless: true,
 			object: false,
+			duration: 60,
+			durationIsPerLevel: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: 50,
+			hasSavingThrow: true,
+			canBeQuicken: true,
+			areaType: "Burst"
 		},
 		"Bless Water": {
 			college: "Transmutation",
@@ -60,8 +97,13 @@
 			object: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
-
+			materialComponent: true,
+			duration: "Instantaneous",
+			materialComponentCost: 2500,
+			empowerable: false,
+			range: "Touch",
+			hasSavingThrow: true,
+			canBeQuicken: false
 		},
 		"Burning Hands": {
 			college: "Evocation",
@@ -70,7 +112,13 @@
 			harmless: false,
 			object: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			duration: "Instantaneous",
+			empowerable: true,
+			range: 15,
+			hasSavingThrow: true,
+			canBeQuicken: true,
+			canBeWiden: true
 		},
 		"Calm Animals": {
 			college: "Enchantment",
@@ -80,7 +128,13 @@
 			harmless: false,
 			object: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			duration: 60,
+			durationIsPerLevel: true,
+			empowerable: true,
+			range: "Close",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Cause Fear": {
 			college: "Necromacy",
@@ -89,7 +143,13 @@
 			harmless: false,
 			object: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			duration: 6,
+			durationMax: 24,
+			empowerable: false,
+			range: "Close",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Charm Animal": {
 			college: "Enchantment",
@@ -97,7 +157,13 @@
 			descriptor: ["Mind-Affecting"],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			duration: 3600,
+			durationIsPerLevel: true,
+			empowerable: false,
+			range: "Close",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Charm Person": {
 			college: "Enchantment",
@@ -105,14 +171,25 @@
 			descriptor: ["Mind-Affecting"],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			duration: 3600,
+			durationIsPerLevel: true,
+			empowerable: false,
+			range: "Close",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Chill Touch": {
 			college: "Necromacy",
 			descriptor: [],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			duration: "Instantaneous",
+			range: "Touch",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Color Spray": {
 			college: "Illusion",
@@ -121,14 +198,25 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: true,
+			duration: "Instantaneous",
+			range: 15,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Command": {
 			college: "Enchantment",
 			subschool: "Compulsion",
 			descriptor: ["Language-Dependent", "Mind-Affecting"],
 			spellResistance: true,
-			verbalComponent: true
+			verbalComponent: true,
+			empowerable: false,
+			range: "Close",
+			duration: 6,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Comprehend Languages": {
 			college: "Divination",
@@ -136,7 +224,13 @@
 			verbalComponent: true,
 			somaticComponent: true,
 			materialComponent: true,
-			divineFocusComponent: true
+			materialComponentCost: 0,
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Personal",
+			duration: 600,
+			durationIsPerLevel: true,
+			canBeQuicken: true
 		},
 		"Create Water": {
 			college: "Conjuration",
@@ -144,7 +238,12 @@
 			descriptor: ["Water"],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Close",
+			duration: "Instantaneous",
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Cure Light Wounds": {
 			college: "Conjuration",
@@ -153,7 +252,12 @@
 			spellResistance: true,
 			harmless: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: "Touch",
+			duration: "Instantaneous",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Cure Minor Wounds": {
 			college: "Conjuration",
@@ -162,7 +266,12 @@
 			spellResistance: true,
 			harmless: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: "Instantaneous",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Curse Water": {
 			college: "Necromacy",
@@ -171,14 +280,26 @@
 			object: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 2500,
+			empowerable: false,
+			range: "Touch",
+			duration: "Instantaneous",
+			hasSavingThrow: true,
+			canBeQuicken: false
 		},
 		"Dancing Lights": {
 			college: "Evocation",
 			descriptor: ["Light"],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Medium",
+			duration: 60,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Daze": {
 			college: "Enchantment",
@@ -187,21 +308,41 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Close",
+			duration: 6,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Deathwatch": {
 			college: "Necromacy",
 			descriptor: ["Evil"],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: 30,
+			duration: 600,
+			durationIsPerLevel: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Detect Animals or Plants": {
 			college: "Divination",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Long",
+			duration: 600,
+			durationRequiresConcentration: true ,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Detect Chaos": {
 			college: "Divination",
@@ -209,7 +350,15 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: true,
+			range: 60,
+			duration: 600,
+			durationRequiresConcentration: true,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Detect Evil": {
 			college: "Divination",
@@ -217,7 +366,15 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: true,
+			range: 60,
+			duration: 600,
+			durationRequiresConcentration: true,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Detect Good": {
 			college: "Divination",
@@ -225,7 +382,15 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: true,
+			range: 60,
+			duration: 600,
+			durationRequiresConcentration: true,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Detect Law": {
 			college: "Divination",
@@ -233,35 +398,72 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: true,
+			range: 60,
+			duration: 600,
+			durationRequiresConcentration: true,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Detect Magic": {
 			college: "Divination",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: 60,
+			duration: 60,
+			durationRequiresConcentration: true,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Detect Poison": {
 			college: "Divination",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Close",
+			duration: "Instantaneous",
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Detect Secret Doors": {
 			college: "Divination",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: 60,
+			duration: 60,
+			durationRequiresConcentration: true,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Detect Snares and Pits": {
 			college: "Divination",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: 60,
+			duration: 600,
+			durationRequiresConcentration: true,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Detect Undead": {
 			college: "Divination",
@@ -270,27 +472,51 @@
 			verbalComponent: true,
 			somaticComponent: true,
 			materialComponent: true,
-			divineFocusComponent: true
+			materialComponentCost: 0,
+			divineFocusComponent: true,
+			empowerable: true,
+			range: 60,
+			duration: 60,
+			durationIsPerLevel: true,
+			durationRequiresConcentration: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Disguise Self": {
 			college: "Illusion",
 			subschool: "Glamer",
 			descriptor: [],
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Personal",
+			duration: 600,
+			durationIsPerLevel: true,
+			dismissible: true,
+			canBeQuicken: true
 		},
 		"Disrupt Undead": {
 			college: "Necromacy",
 			descriptor: [],
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: "Close",
+			duration: "Instantaneous",
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Divine Favor": {
 			college: "Evocation",
 			descriptor: [],
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Personal",
+			duration: 60,
+			canBeQuicken: true
 		},
 		"Doom": {
 			college: "Necromacy",
@@ -298,7 +524,13 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Medium",
+			duration: 60,
+			durationIsPerLevel: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Endure Elements": {
 			college: "Abjuration",
@@ -307,6 +539,11 @@
 			harmless: true,
 			verbalComponent: true,
 			somaticComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 86400,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Enlarge Person": {
 			college: "Transmutation",
@@ -314,7 +551,15 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Close",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Entangle": {
 			college: "Transmutation",
@@ -322,27 +567,52 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Long",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true,
+			canBeWiden: true
 		},
 		"Entropic Shield": {
 			college: "Abjuration",
 			descriptor: [],
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Personal",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			canBeQuicken: true
 		},
 		"Erase": {
 			college: "Transmutation",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Close",
+			duration: "Instantaneous",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Expeditious Retreat": {
 			college: "Transmutation",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Personal",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			canBeQuicken: true
 		},
 		"Faerie Fire": {
 			college: "Evocation",
@@ -350,20 +620,37 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Long",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true,
+			canBeWiden: true
 		},
 		"Feather Fall": {
 			college: "Transmutation",
 			descriptor: [],
 			spellResistance: true,
 			object: true,
-			verbalComponent: true
+			verbalComponent: true,
+			empowerable: false,
+			range: "Close",
+			hasSavingThrow: true,
+			canBeQuicken: false
 		},
 		"Flare": {
 			college: "Evocation",
 			descriptor: ["Light"],
 			spellResistance: true,
-			verbalComponent: true
+			verbalComponent: true,
+			empowerable: false,
+			range: "Close",
+			duration: "Instantaneous",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Ghost Sound": {
 			college: "Illusion",
@@ -372,7 +659,15 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Close",
+			duration: 6,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Goodberry": {
 			college: "Transmutation",
@@ -380,7 +675,13 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: true,
+			range: "Touch",
+			duration: 86400,
+			durationIsPerLevel: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Grease": {
 			college: "Conjuration",
@@ -389,21 +690,40 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Close",
+			duration: 6,
+			durationIsPerLevel: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Guidance": {
 			college: "Divination",
 			descriptor: [],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Hide from Animals": {
 			college: "Abjuration",
 			descriptor: [],
 			spellResistance: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 600,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Hide from Undead": {
 			college: "Abjuration",
@@ -411,13 +731,27 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 600,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Hold Portal": {
 			college: "Abjuration",
 			descriptor: [],
 			spellResistance: false,
-			verbalComponent: true
+			verbalComponent: true,
+			empowerable: false,
+			range: "Medium",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true 
 		},
 		"Hypnotism": {
 			college: "Enchantment",
@@ -425,30 +759,53 @@
 			descriptor: ["Mind-Affecting"],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: "Close",
+			duration: 12,
+			durationMax: 48,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
-		"Indentify": {
+		"Identify": {
 			college: "Divination",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
 			materialComponent: true,
-			divineFocusComponent: true
+			materialComponentCost: 10000,
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: "Instantaneous",
+			hasSavingThrow: false,
+			canBeQuicken: false
 		},
 		"Inflict Light Wounds": {
 			college: "Necromancy",
 			descriptor: [],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: "Touch",
+			duration: "Instantaneous",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Inflict Minor Wounds": {
 			college: "Necromacy",
 			descriptor: [],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: "Instantaneous",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Jump": {
 			college: "Transmutation",
@@ -456,13 +813,25 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Know Direction": {
 			college: "Divination",
 			descriptor: [],
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Personal",
+			duration: "Instantaneous",
+			canBeQuicken: true
 		},
 		"Light": {
 			college: "Evocation",
@@ -470,7 +839,15 @@
 			spellResistance: false,
 			verbalComponent: true,
 			materialComponent: true,
-			divineFocusComponent: true
+			materialComponentCost: 0,
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 600,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Longstrider": {
 			college: "Transmutation",
@@ -478,7 +855,14 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Personal",
+			duration: 3600,
+			durationIsPerLevel: true,
+			dismissible: true,
+			canBeQuicken: true
 		},
 		"Lullaby": {
 			college: "Enchantment",
@@ -486,7 +870,15 @@
 			descriptor: ["Mind-Affecting"],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Medium",
+			duration: 6,
+			durationIsPerLevel: true,
+			durationBoostedByConcentration: true,
+			hasSavingThrow: true,
+			canBeQuicken: true,
+			canBeWiden: true
 		},
 		"Mage Armor": {
 			college: "Conjuration",
@@ -495,14 +887,26 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			focusComponent: true
+			focusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 3600,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Mage Hand": {
 			college: "Transmutation",
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Mage Hand",
+			duration: "Concentration",
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Magic Fang": {
 			college: "Transmutation",
@@ -511,14 +915,25 @@
 			harmless: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			durationIsPerLevel: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Magic Missile": {
 			college: "Evocation",
 			descriptor: "Force",
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: "Medium",
+			duration: "Instantaneous",
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Magic Stone": {
 			college: "Transmutation",
@@ -528,7 +943,12 @@
 			object: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: true,
+			range: "Touch",
+			duration: 1800,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Magic Weapon": {
 			college: "Transmutation",
@@ -538,7 +958,13 @@
 			object: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			durationIsPerLevel: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Mending": {
 			college: "Transmutation",
@@ -547,7 +973,12 @@
 			harmless: true,
 			object: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: 10,
+			duration: "Instantaneous",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Message": {
 			college: "Transmutation",
@@ -555,7 +986,13 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			focusComponent: true
+			focusComponent: true,
+			empowerable: false,
+			range: "Medium",
+			duration: "600",
+			durationIsPerLevel: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Mount": {
 			college: "Conjuration",
@@ -564,7 +1001,15 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Close",
+			duration: 7200,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Nystul's Magic Aura": {
 			college: "Illusion",
@@ -573,7 +1018,14 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			focusComponent: true
+			focusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 86400,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Obscuring Mist": {
 			college: "Conjuration",
@@ -582,6 +1034,12 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
+			empowerable: false,
+			range: 20,
+			duration: 60,
+			durationIsPerLevel: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Open/Close": {
 			college: "Transmutation",
@@ -590,7 +1048,12 @@
 			object: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			focusComponent: true
+			focusComponent: true,
+			empowerable: false,
+			range: "Close",
+			duration: "Instantaneous",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Pass without Trace": {
 			college: "Transmutation",
@@ -599,21 +1062,40 @@
 			harmless: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 3600,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Prestidigitation": {
 			college: "Universal",
 			descriptor: [],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: 10,
+			duration: 3600,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Produce Flame": {
 			college: "Evocation",
 			descriptor: ["Fire"],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: 0,
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Protection from Chaos": {
 			college: "Abjuration",
@@ -622,7 +1104,15 @@
 			verbalComponent: true,
 			somaticComponent: true,
 			materialComponent: true,
-			divineFocusComponent: true
+			materialComponentCost: 0,
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow:true,
+			canBeQuicken: true
 		},
 		"Protection from Evil": {
 			college: "Abjuration",
@@ -631,7 +1121,15 @@
 			verbalComponent: true,
 			somaticComponent: true,
 			materialComponent: true,
-			divineFocusComponent: true
+			materialComponentCost: 0,
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Protection from Good": {
 			college: "Abjuration",
@@ -640,7 +1138,15 @@
 			verbalComponent: true,
 			somaticComponent: true,
 			materialComponent: true,
-			divineFocusComponent: true
+			materialComponentCost: 0,
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Protection from Law": {
 			college: "Abjuration",
@@ -649,7 +1155,15 @@
 			verbalComponent: true,
 			somaticComponent: true,
 			materialComponent: true,
-			divineFocusComponent: true
+			materialComponentCost: 0,
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Purify Food and Drink": {
 			college: "Transmutation",
@@ -657,28 +1171,49 @@
 			spellResistance: true,
 			object: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: 10,
+			duration: "Instantaneous",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Ray of Enfeeblement": {
 			college: "Necromacy",
 			descriptor: [],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: "Close",
+			duration: 60,
+			durationIsPerLevel: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Ray of Frost": {
 			college: "Evocation",
 			descriptor: ["Cold"],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: "Close",
+			duration: "Instantaneous",
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Read Magic": {
 			college: "Divination",
 			descriptor: [],
 			verbalComponent: true,
 			somaticComponent: true,
-			focusComponent: true
+			focusComponent: true,
+			empowerable: false,
+			range: "Personal",
+			duration: 600,
+			durationIsPerLevel: true,
+			canBeQuicken: true
 		},
 		"Reduce Person": {
 			college: "Transmutation",
@@ -686,7 +1221,15 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0, 
+			empowerable: false,
+			range: "Close",
+			duration: 3600,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Remove Fear": {
 			college: "Abjuration",
@@ -694,7 +1237,11 @@
 			spellResistance: true,
 			harmless: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Close",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Resistance": {
 			college: "Abjuration",
@@ -704,7 +1251,13 @@
 			verbalComponent: true,
 			somaticComponent: true,
 			materialComponent: true,
-			divineFocusComponent: true
+			materialComponentCost: 0,
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Sanctuary": {
 			college: "Abjuration",
@@ -712,13 +1265,26 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 6,
+			durationIsPerLevel: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Shield": {
 			college: "Abjuration",
 			descriptor: ["Force"],
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Personal",
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Shield of Faith": {
 			college: "Abjuration",
@@ -727,7 +1293,14 @@
 			harmless: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			durationIsPerLevel: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Shillelagh": {
 			college: "Transmutation",
@@ -736,14 +1309,25 @@
 			object: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: true,
+			range: "Touch",
+			duration: 60,
+			durationIsPerLevel: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Shocking Grasp": {
 			college: "Evocation",
 			descriptor: ["Electricity"],
 			spellResistance: true,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: true,
+			range: "Touch",
+			duration: "Instantaneous",
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Silent Image": {
 			college: "Illusion",
@@ -751,7 +1335,12 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			focusComponent: true
+			focusComponent: true,
+			empowerable: false,
+			range: "Long",
+			duration: "Concentration",
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Sleep": {
 			college: "Enchantment",
@@ -760,7 +1349,15 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Medium",
+			duration: 60,
+			durationIsPerLevel: true,
+			hasSavingThrow: true,
+			canBeQuicken: true,
+			canBeWiden: true
 		},
 		"Speak with Animals": {
 			college: "Divination",
@@ -768,6 +1365,11 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
+			empowerable: false,
+			range: "Personal",
+			duration: 60,
+			durationIsPerLevel: true,
+			canBeQuicken: true
 		},
 		"Summon Instrument": {
 			college: "Conjuration",
@@ -775,7 +1377,14 @@
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: 0,
+			duration: 60,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Summon Monster I": {
 			college: "Conjuration",
@@ -785,7 +1394,14 @@
 			verbalComponent: true,
 			somaticComponent: true,
 			focusComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Close",
+			duration: 6,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Summon Nature's Ally I": {
 			college: "Conjuration",
@@ -794,7 +1410,14 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Close",
+			duration: 6,
+			durationIsPerLevel: true,
+			dismissible: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Tenser's Floating Disk": {
 			college: "Evocation",
@@ -802,7 +1425,13 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Close",
+			duration: 3600,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Touch of Fatigue": {
 			college: "Necromacy",
@@ -810,13 +1439,23 @@
 			spellResistance: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Touch",
+			duration: 600,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"True Strike": {
 			college: "Divination",
 			descriptor: [],
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Personal",
+			duration: "See text",
+			canBeQuicken: true
 		},
 		"Unseen Servant": {
 			college: "Conjuration",
@@ -825,7 +1464,14 @@
 			spellResistance: false,
 			verbalComponent: true,
 			somaticComponent: true,
-			materialComponent: true
+			materialComponent: true,
+			materialComponentCost: 0,
+			empowerable: false,
+			range: "Close",
+			duration: 3600,
+			durationIsPerLevel: true,
+			hasSavingThrow: false,
+			canBeQuicken: true
 		},
 		"Ventriloquism": {
 			college: "Illusion",
@@ -833,7 +1479,13 @@
 			descriptor: [],
 			spellResistance: false,
 			verbalComponent: true,
-			somaticComponent: true
+			somaticComponent: true,
+			empowerable: false,
+			range: "Close",
+			duration: 60,
+			durationIsPerLevel: true,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		},
 		"Virtue": {
 			college: "Transmutation",
@@ -842,6 +1494,11 @@
 			harmless: true,
 			verbalComponent: true,
 			somaticComponent: true,
-			divineFocusComponent: true
+			divineFocusComponent: true,
+			empowerable: false,
+			range: "Touch",
+			duration: 60,
+			hasSavingThrow: true,
+			canBeQuicken: true
 		}
 	}

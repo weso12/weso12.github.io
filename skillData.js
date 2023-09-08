@@ -215,7 +215,7 @@
 		"Perform": {
 			attribute: "Charisma",
 			hasSubskills: true,
-			subskills: ["Act", "Comedy", "Dance", "Keyboard Instruments", "Oratory", "Percussion Instrument", "String Instruments", "Wind Instrument", "Sing"],
+			subskills: ["Act", "Comedy", "Dance", "Keyboard Instruments", "Oratory", "Percussion Instrumens", "String Instruments", "Wind Instrument", "Sing"],
 			armorCheckPenalty: false,
 			allowedUntrained: true
 		},

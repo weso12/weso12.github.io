@@ -10,8 +10,38 @@
 		}
 		return sum - smallest
 	}
-	function calculateModifer(number){
+	function calculateModifier(number){
 		return Math.floor((number - 10)/2)
+	}
+	function calculateSkillRanksAndBunuses(characterInfo, skill, subskill){
+		let total = 0
+		if (subskill){
+			if (characterInfo.skillRanks[skill + "(" + subskill + ")"]){
+				total += characterInfo.skillRanks[skill + "(" + subskill + ")"]
+			}
+			if (characterInfo.skillBonuses[skill + "(" + subskill + ")"]){
+				total += characterInfo.skillBonuses[skill + "(" + subskill + ")"]
+			}
+		}
+		else {
+			if (characterInfo.skillRanks[skill]){
+				total += characterInfo.skillRanks[skill]
+			}
+			if (characterInfo.skillBonuses[skill]){
+				total += characterInfo.skillBonuses[skill]
+			}
+		}
+		return total
+	}
+	function calculateSkillMod(characterInfo, skill, subskill){
+		if (subskill){
+			var total = calculateSkillRanksAndBunuses(characterInfo, skill, subskill)
+		}
+		else {
+			var total = calculateSkillRanksAndBunuses(characterInfo, skill)
+		}
+		total += calculateModifier(characterInfo[skillData[skill].attribute.toLowerCase()])
+		return total
 	}
 	function displayDraconicWizardReplacementOdds(){
 		if (document.getElementById("DraconicWizardReplacement").checked){

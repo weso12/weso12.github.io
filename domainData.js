@@ -4,7 +4,7 @@
 			incompatibleDomains: [],
 			spells: [null,"Obscuring Mist"],
 			uponLearning: function(characterInfo){
-				if (calculateModifer(characterInfo.charisma) > -3){
+				if (calculateModifier(characterInfo.charisma) > -3){
 					characterInfo.features.push("Turn Earth Creatures/Rebuke Air Creatures")
 				}
 			}
@@ -65,7 +65,7 @@
 			incompatibleDomains: [],
 			spells: [null, "Burning Hands"],
 			uponLearning: function (characterInfo) {
-				if (calculateModifer(characterInfo.charisma) > -3){
+				if (calculateModifier(characterInfo.charisma) > -3){
 					characterInfo.features.push("Turn Water Creatures/Rebuke Fire Creatures")
 				}
 			}
@@ -134,8 +134,8 @@
 			incompatibleDomains: [],
 			spells: [null, "Entangle"],
 			uponLearning: function (characterInfo) {
-				if (calculateModifer(characterInfo.charisma) > -3){
-					characterInfo.features.push("Rebuke Plants" + calculateModifer(characterInfo.charisma) +"/day")
+				if (calculateModifier(characterInfo.charisma) > -3){
+					characterInfo.features.push("Rebuke Plants")
 				}
 				characterInfo.classSkills.push("Knowledge (Nature)")
 			}
@@ -266,7 +266,7 @@
 				else {
 					weapon = godData[characterInfo.godWorshiped].favoredWeapon[Math.floor(Math.random() * godData[characterInfo.godWorshiped].favoredWeapon.length)]
 				}
-				if (weaponData[weapon].profiencyType === "Martial" || (weaponData[weapon].profiencyType === "Exotic" && characterInfo.features.includes("Weapon Familiarity (" + property + ")")) && (!characterInfo.weaponProfiencies.allMartial || !characterInfo.weaponProfiencies[weapon])){
+				if (weaponData[weapon].profiencyType === "Martial" || (weaponData[weapon].profiencyType === "Exotic" && characterInfo.features.includes("Weapon Familiarity (" + property + ")")) && (!characterInfo.weaponProficiencies.allMartial || !characterInfo.weaponProficiencies[weapon])){
 					addFeat(characterInfo, "Martial Weapon Proficiency", weapon)
 				}
 				addFeat(characterInfo, "Weapon Focus", weapon)
@@ -278,7 +278,7 @@
 			incompatibleDomains: [],
 			spells: [null, "Obscuring Mist"],
 			uponLearning: function (characterInfo) {
-				if (calculateModifer(characterInfo.charisma) > -3){
+				if (calculateModifier(characterInfo.charisma) > -3){
 					characterInfo.features.push("Turn Fire Creatures/Rebuke Water Creatures")
 				}
 			}

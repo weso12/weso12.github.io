@@ -5,7 +5,7 @@
 			var modifierSum = 0;
 			for (var i = 0; i < 6; i++){
 				array.push(roll4d6b3())
-				modifierSum += calculateModifer(array[i])
+				modifierSum += calculateModifier(array[i])
 			}
 			if (modifierSum > 0 && Math.max(...array) > 13){
 				break;
@@ -74,7 +74,7 @@
 		characterInfo.charisma += raceData[characterInfo.race].attributeMods.Charisma
 		while ((document.getElementById("basicfiltering").checked 
 			&& classData[characterInfo.class].fullCaster && characterInfo[classData[characterInfo.class].castingAttribute.toLowerCase()] < 10) &&
-			(characterInfo.class !== "Cleric" || !document.getElementById("basicfiltering").checked || calculateModifer(characterInfo.charisma) > -3)){
+			(characterInfo.class !== "Cleric" || !document.getElementById("basicfiltering").checked || calculateModifier(characterInfo.charisma) > -3)){
 			var numbers = [0, 1, 2, 3, 4, 5]
 			if (document.getElementById("weighattributes").checked){
 				array.sort(function(a,b){return b-a})
@@ -112,9 +112,9 @@
 		for (var i = 0; i < classData[characterInfo.class].classSkills.length; i++){
 			characterInfo.classSkills.push(classData[characterInfo.class].classSkills[i])
 		}
-		characterInfo.hitPoints = Math.max(1, classData[characterInfo.class].hitDie + calculateModifer(characterInfo.constitution))
-		characterInfo.initiative = calculateModifer(characterInfo.dexterity)
-		characterInfo.skillPoints = classData[characterInfo.class].skillPoints + calculateModifer(characterInfo.intelligence);
+		characterInfo.hitPoints = Math.max(1, classData[characterInfo.class].hitDie + calculateModifier(characterInfo.constitution))
+		characterInfo.initiative = calculateModifier(characterInfo.dexterity)
+		characterInfo.skillPoints = classData[characterInfo.class].skillPoints + calculateModifier(characterInfo.intelligence);
 		characterInfo.skillRanks = {}
 		if (characterInfo.skillPoints < 1){
 			characterInfo.skillPoints = 1
@@ -145,52 +145,45 @@
 			characterInfo.baseAttackBonus = 0
 		}
 		if (classData[characterInfo.class].fortitudeSave === "Poor"){
-			characterInfo.fortitude = 0 + calculateModifer(characterInfo.constitution)
+			characterInfo.fortitude = 0 + calculateModifier(characterInfo.constitution)
 		}
 		else {
-			characterInfo.fortitude = 2 + calculateModifer(characterInfo.constitution)
+			characterInfo.fortitude = 2 + calculateModifier(characterInfo.constitution)
 		}
 		if (classData[characterInfo.class].reflexSave === "Poor"){
-			characterInfo.reflex = 0 + calculateModifer(characterInfo.dexterity)
+			characterInfo.reflex = 0 + calculateModifier(characterInfo.dexterity)
 		}
 		else {
-			characterInfo.reflex = 2 + calculateModifer(characterInfo.dexterity)
+			characterInfo.reflex = 2 + calculateModifier(characterInfo.dexterity)
 		}
 		if (classData[characterInfo.class].willSave === "Poor"){
-			characterInfo.will = 0 + calculateModifer(characterInfo.wisdom)
+			characterInfo.will = 0 + calculateModifier(characterInfo.wisdom)
 		}
 		else {
-			characterInfo.will = 2 + calculateModifer(characterInfo.wisdom)
+			characterInfo.will = 2 + calculateModifier(characterInfo.wisdom)
 		}
 		raceData[characterInfo.race].assignRaceFeatures(characterInfo)
 		classData[characterInfo.class].assignClassFeatures[1](characterInfo)
 		//Select Skills
 		//I'll do languages first because there is no clear step of where languages go and they are kind of skills
-		for (var i = 0;	 i < calculateModifer(characterInfo.intelligence); i++){
+		for (var i = 0;	 i < calculateModifier(characterInfo.intelligence); i++){
 			characterInfo.languagesKnown.push(characterInfo.potentionalLanguages.splice(Math.floor(Math.random() * characterInfo.potentionalLanguages.length), 1)[0])
 			if (characterInfo.potentionalLanguages.length === 0){
-				if (document.getElementById("bonusLanguagesOverflow").checked){
-					for (var property in languageData){
-						if (!characterInfo.languagesKnown.includes(property) && (!languageData[property].secretLanguage || document.getElementById("OverflowSecretLanguages").checked)){
-							characterInfo.potentionalLanguages.push(property)
-						}
-					}
-				}
-				else {
-					break;
-				}
+				break;
 			}
 		}
 		let skillRollArray = []
 		for (var property in skillData){
-			if (characterInfo.classSkills.includes(property)){
-				for (var i = 0; i < parseInt(document.getElementById("classSkillWeight").value); i++){
-					skillRollArray.push(property)
+			if (!characterInfo.features.includes("Illiteracy") || property !== "Forgery"){
+				if (characterInfo.classSkills.includes(property)){
+					for (var i = 0; i < parseInt(document.getElementById("classSkillWeight").value); i++){
+						skillRollArray.push(property)
+					}
 				}
-			}
-			else {
-				for (var i = 0; i < parseInt(document.getElementById("crossClassSkillWeight").value); i++){
-					skillRollArray.push(property)
+				else {
+					for (var i = 0; i < parseInt(document.getElementById("crossClassSkillWeight").value); i++){
+						skillRollArray.push(property)
+					}
 				}
 			}
 		}
@@ -433,7 +426,15 @@
 				if (featData[property].canLearn(characterInfo) && (!document.getElementById("basicfiltering").checked || featData[property].commonSenseCheck(characterInfo)) &&
 				(featData[property].stacking || featData[property].hasSubfeats || !characterInfo.featsKnown.includes(property)) &&
 				((!featData[property].hasSubfeats || !featData[property].stacking) || test)){
-					featArray.push(property)
+					if (document.getElementById("weighfeats")){
+						let weight = featData[property].determineWeight(characterInfo)
+						for (var j = 0; j < weight; j++){
+							featArray.push(property)
+						}
+					}
+					else {
+						featArray.push(property)
+					}
 				}
 			}
 			let featChosen = featArray[Math.floor(Math.random() * featArray.length)]
@@ -441,8 +442,17 @@
 				let subfeatarray = []
 				let subfeatsToCheck2 = featData[featChosen].generateSubfeats(characterInfo)
 				for (var j = 0; j < subfeatsToCheck2.length; j++){
-					if (!characterInfo.featsKnown.includes(property + " (" + subfeatsToCheck2[i] + ")") || featData[featChosen].stacking){
-						subfeatarray.push(subfeatsToCheck2[j]);
+					if (!characterInfo.featsKnown.includes(property + " (" + subfeatsToCheck2[j] + ")") || featData[featChosen].stacking){
+						if (document.getElementById("weighfeats").checked){
+
+							let weight = featData[featChosen].determineSubfeatWeight(characterInfo, subfeatsToCheck2[j])
+							for (var k = 0; k < weight; k++){
+								subfeatarray.push(subfeatsToCheck2[j])
+							}
+						}
+						else {
+							subfeatarray.push(subfeatsToCheck2[j]);
+						}
 					}
 				}
 				let subfeatRolled = subfeatarray[Math.floor(Math.random() * subfeatarray.length)]
@@ -454,7 +464,7 @@
 		}
 		for (var i = 0; i < characterInfo.fighterBonusFeatsToLearn; i++){
 			let featArray = []
-			for (var property in featData){
+				for (var property in featData){
 				if (featData[property].hasSubfeats && !featData[property].stacking){
 					var test = false
 					let subfeatsToCheck = featData[property].generateSubfeats(characterInfo)
@@ -469,8 +479,15 @@
 				(featData[property].stacking || featData[property].hasSubfeats || !characterInfo.featsKnown.includes(property)) &&
 				((!featData[property].hasSubfeats && !featData[property].stacking) || test) &&
 				featData[property].fighterBonusFeat){
-					featArray.push(property)
-				}
+					if (document.getElementById("weighfeats")){
+						let weight = featData[property].determineWeight(characterInfo)
+						for (var j = 0; j < weight; j++){
+							featArray.push(property)
+						}
+					}
+					else {
+						featArray.push(property)
+					}				}
 			}
 			let featChosen = featArray[Math.floor(Math.random() * featArray.length)]
 			if (featData[featChosen].hasSubfeats){
@@ -478,8 +495,15 @@
 				let subfeatsToCheck2 = featData[featChosen].generateSubfeats(characterInfo)
 				for (var j = 0; j < subfeatsToCheck2.length; j++){
 					if (!characterInfo.featsKnown.includes(property + " (" + subfeatsToCheck2[j] + ")") || featData[featChosen].stacking){
-						subfeatarray.push(subfeatsToCheck2[j]);
-						break;
+						if (document.getElementById("weighfeats")){
+							let weight = featData[featChosen].determineSubfeatWeight(characterInfo, subfeatsToCheck2[j])
+							for (var k = 0; k < weight; k++){
+								subfeatarray.push(subfeatsToCheck2[j])
+							}
+						}
+						else {
+							subfeatarray.push(subfeatsToCheck2[j]);
+						}
 					}
 				}
 				let subfeatRolled = subfeatarray[Math.floor(Math.random() * subfeatarray.length)]
@@ -657,46 +681,46 @@
 		let attributeCell = document.createElement("TD")
 		attributeCell.style.border = "2px solid black"
 		attributeCell.style.borderCollapse = "collapse"
-		if (calculateModifer(characterInfo.strength) >= 0){
-			attributeCell.appendChild(document.createTextNode("Strength: " + characterInfo.strength + " (+" + calculateModifer(characterInfo.strength) + ")"))
+		if (calculateModifier(characterInfo.strength) >= 0){
+			attributeCell.appendChild(document.createTextNode("Strength: " + characterInfo.strength + " (+" + calculateModifier(characterInfo.strength) + ")"))
 		}
 		else{
-			attributeCell.appendChild(document.createTextNode("Strength: " + characterInfo.strength + " (" + calculateModifer(characterInfo.strength) + ")"))
+			attributeCell.appendChild(document.createTextNode("Strength: " + characterInfo.strength + " (" + calculateModifier(characterInfo.strength) + ")"))
 		}
 		attributeCell.appendChild(document.createElement("BR"))
-		if (calculateModifer(characterInfo.dexterity) >= 0){
-			attributeCell.appendChild(document.createTextNode("Dexterity: " + characterInfo.dexterity + " (+" + calculateModifer(characterInfo.dexterity) + ")"))
+		if (calculateModifier(characterInfo.dexterity) >= 0){
+			attributeCell.appendChild(document.createTextNode("Dexterity: " + characterInfo.dexterity + " (+" + calculateModifier(characterInfo.dexterity) + ")"))
 		}
 		else {
-			attributeCell.appendChild(document.createTextNode("Dexterity: " + characterInfo.dexterity + " (" + calculateModifer(characterInfo.dexterity) + ")"))
+			attributeCell.appendChild(document.createTextNode("Dexterity: " + characterInfo.dexterity + " (" + calculateModifier(characterInfo.dexterity) + ")"))
 		}
 		attributeCell.appendChild(document.createElement("BR"))
-		if (calculateModifer(characterInfo.constitution) >= 0){
-			attributeCell.appendChild(document.createTextNode("Constitution: " + characterInfo.constitution + " (+" + calculateModifer(characterInfo.constitution) + ")"))
+		if (calculateModifier(characterInfo.constitution) >= 0){
+			attributeCell.appendChild(document.createTextNode("Constitution: " + characterInfo.constitution + " (+" + calculateModifier(characterInfo.constitution) + ")"))
 		}
 		else {
-			attributeCell.appendChild(document.createTextNode("Constitution: " + characterInfo.constitution + " (" + calculateModifer(characterInfo.constitution) + ")"))
+			attributeCell.appendChild(document.createTextNode("Constitution: " + characterInfo.constitution + " (" + calculateModifier(characterInfo.constitution) + ")"))
 		}
 		attributeCell.appendChild(document.createElement("BR"))
-		if (calculateModifer(characterInfo.intelligence) >= 0){
-			attributeCell.appendChild(document.createTextNode("Intelligence: " + characterInfo.intelligence + " (+" + calculateModifer(characterInfo.intelligence) + ")"))
+		if (calculateModifier(characterInfo.intelligence) >= 0){
+			attributeCell.appendChild(document.createTextNode("Intelligence: " + characterInfo.intelligence + " (+" + calculateModifier(characterInfo.intelligence) + ")"))
 		}
 		else {
-			attributeCell.appendChild(document.createTextNode("Intelligence: " + characterInfo.intelligence + " (" + calculateModifer(characterInfo.intelligence) + ")"))
+			attributeCell.appendChild(document.createTextNode("Intelligence: " + characterInfo.intelligence + " (" + calculateModifier(characterInfo.intelligence) + ")"))
 		}
 		attributeCell.appendChild(document.createElement("BR"))
-		if (calculateModifer(characterInfo.wisdom) >= 0){
-			attributeCell.appendChild(document.createTextNode("Wisdom: " + characterInfo.wisdom + " (+" + calculateModifer(characterInfo.wisdom) + ")"))
+		if (calculateModifier(characterInfo.wisdom) >= 0){
+			attributeCell.appendChild(document.createTextNode("Wisdom: " + characterInfo.wisdom + " (+" + calculateModifier(characterInfo.wisdom) + ")"))
 		}
 		else {
-			attributeCell.appendChild(document.createTextNode("Wisdom: " + characterInfo.wisdom + " (" + calculateModifer(characterInfo.wisdom) + ")"))
+			attributeCell.appendChild(document.createTextNode("Wisdom: " + characterInfo.wisdom + " (" + calculateModifier(characterInfo.wisdom) + ")"))
 		}
 		attributeCell.appendChild(document.createElement("BR"))
-		if (calculateModifer(characterInfo.charisma) >= 0){
-			attributeCell.appendChild(document.createTextNode("Charisma: " + characterInfo.charisma + " (+" + calculateModifer(characterInfo.charisma) + ")"))
+		if (calculateModifier(characterInfo.charisma) >= 0){
+			attributeCell.appendChild(document.createTextNode("Charisma: " + characterInfo.charisma + " (+" + calculateModifier(characterInfo.charisma) + ")"))
 		}
 		else {
-			attributeCell.appendChild(document.createTextNode("Charisma: " + characterInfo.charisma + " (" + calculateModifer(characterInfo.charisma) + ")"))
+			attributeCell.appendChild(document.createTextNode("Charisma: " + characterInfo.charisma + " (" + calculateModifier(characterInfo.charisma) + ")"))
 		}
 		attributeCell.colSpan = "6"
 		attributeRow.appendChild(attributeCell)
@@ -823,7 +847,7 @@
 					intellgienceModCell.appendChild(document.createTextNode("+"))
 				}
 				intellgienceModCell.style.textAlign = "center"
-				intellgienceModCell.appendChild(document.createTextNode(calculateModifer(characterInfo.intelligence)))
+				intellgienceModCell.appendChild(document.createTextNode(calculateModifier(characterInfo.intelligence)))
 				knowledgeSkillRow.appendChild(intellgienceModCell)
 				let knowledgeRankCell = document.createElement("TD")
 				knowledgeRankCell.style.border = "1px solid black"
@@ -838,7 +862,7 @@
 				knowledgeMiscModCell.appendChild(document.createTextNode("0"))
 				knowledgeSkillRow.appendChild(knowledgeMiscModCell)
 				let knowledgeTotalCell = document.createElement("TD")
-				knowledgeTotalCell.appendChild(document.createTextNode(calculateModifer(characterInfo.intelligence)))
+				knowledgeTotalCell.appendChild(document.createTextNode(calculateModifier(characterInfo.intelligence)))
 				knowledgeTotalCell.style.border = "1px solid black"
 				knowledgeTotalCell.style.borderCollapse = "collapse"
 				knowledgeTotalCell.style.textAlign = "center"
@@ -875,7 +899,7 @@
 					abilityModCell.appendChild(document.createTextNode("+"))
 				}
 				abilityModCell.style.textAlign = "center"
-				abilityModCell.appendChild(document.createTextNode(calculateModifer(characterInfo[skillData[property].attribute.toLowerCase()])))
+				abilityModCell.appendChild(document.createTextNode(calculateModifier(characterInfo[skillData[property].attribute.toLowerCase()])))
 				skillRow.appendChild(abilityModCell)
 				let skillRankCell = document.createElement("TD")
 				skillRankCell.style.border = "1px solid black"
@@ -899,7 +923,7 @@
 					miscModCell.appendChild(document.createTextNode(characterInfo.skillBonuses[property]))
 				}
 				skillRow.appendChild(miscModCell)
-				let skillModTotal = calculateModifer(characterInfo[skillData[property].attribute.toLowerCase()])
+				let skillModTotal = calculateModifier(characterInfo[skillData[property].attribute.toLowerCase()])
 				if (characterInfo.skillRanks[property]){
 					skillModTotal += characterInfo.skillRanks[property]
 				}
@@ -950,7 +974,7 @@
 							abilitysubskillModCell.appendChild(document.createTextNode("+"))
 						}
 						abilitysubskillModCell.style.textAlign = "center"
-						abilitysubskillModCell.appendChild(document.createTextNode(calculateModifer(characterInfo[skillData[property].attribute.toLowerCase()])))
+						abilitysubskillModCell.appendChild(document.createTextNode(calculateModifier(characterInfo[skillData[property].attribute.toLowerCase()])))
 						subskillRow.appendChild(abilitysubskillModCell)
 						let subskillRankCell = document.createElement("TD")
 						subskillRankCell.style.border = "1px solid black"
@@ -974,7 +998,7 @@
 							miscsubskillsModCell.appendChild(document.createTextNode(characterInfo.skillBonuses[property]))
 						}
 						subskillRow.appendChild(miscsubskillsModCell)
-						let subskillModTotal = calculateModifer(characterInfo[skillData[property].attribute.toLowerCase()])
+						let subskillModTotal = calculateModifier(characterInfo[skillData[property].attribute.toLowerCase()])
 						if (characterInfo.skillRanks[property + " (" + skillData[property].subskills[i] + ")"]){
 							subskillModTotal += characterInfo.skillRanks[property + " (" + skillData[property].subskills[i] + ")"]
 						}
@@ -1027,7 +1051,7 @@
 						abilityModCell.appendChild(document.createTextNode("+"))
 					}
 					abilityModCell.style.textAlign = "center"
-					abilityModCell.appendChild(document.createTextNode(calculateModifer(characterInfo[skillData[property].attribute.toLowerCase()])))
+					abilityModCell.appendChild(document.createTextNode(calculateModifier(characterInfo[skillData[property].attribute.toLowerCase()])))
 					skillRow.appendChild(abilityModCell)
 					let skillRankCell = document.createElement("TD")
 					skillRankCell.style.border = "1px solid black"
@@ -1046,7 +1070,7 @@
 					miscModCell.style.textAlign = "center"
 					miscModCell.appendChild(document.createTextNode("0"))
 					skillRow.appendChild(miscModCell)
-					let skillModTotal = calculateModifer(characterInfo[skillData[property].attribute.toLowerCase()])
+					let skillModTotal = calculateModifier(characterInfo[skillData[property].attribute.toLowerCase()])
 					let skillModTotalCell = document.createElement("TD")
 					skillModTotalCell.style.border = "1px solid black"
 					skillModTotalCell.style.borderCollapse = "collapse"
@@ -1288,7 +1312,7 @@
 				}
 				else {
 					spellsKnownCell.appendChild(
-						document.createTextNode((classData[characterInfo.class].spellsPerDay[1][i] + Math.ceil((calculateModifer(characterInfo[classData[characterInfo.class].castingAttribute.toLowerCase()]) + 1 - i)/4))))
+						document.createTextNode((classData[characterInfo.class].spellsPerDay[1][i] + Math.ceil((calculateModifier(characterInfo[classData[characterInfo.class].castingAttribute.toLowerCase()]) + 1 - i)/4))))
 				}
 				spellsKnownCell.appendChild(document.createTextNode(" Spells per day"))
 				if (characterInfo.class === "Wizard" && characterInfo.wizardSpeciality !== "None"){
@@ -1319,4 +1343,25 @@
 		equipmentCell.appendChild(document.createTextNode(characterInfo.startingGold/100 + " gp worth of money and equipment"))
 		equipmentRow.appendChild(equipmentCell)
 		table.appendChild(equipmentRow)
+		if (characterInfo.featsKnown.includes("Spell Mastery")){
+			let notesRow = document.createElement("TR")
+			notesRow.style.borderTopWidth = "2px"
+			notesRow.style.borderTopColor = "black"
+			notesRow.style.borderTopStyle = "solid"
+			let notesCell = document.createElement("TD")
+			notesCell.colSpan = "6"
+			let underline = document.createElement("U")
+			underline.appendChild(document.createTextNode("Notes"))
+			notesCell.appendChild(underline)
+			notesCell.appendChild(document.createElement("BR"))
+			notesCell.appendChild(document.createTextNode("Spell Mastery Spells: "))
+			for (var i = 0; i < characterInfo.wizardSpellMasteryArray.length; i++){
+				notesCell.appendChild(document.createTextNode(characterInfo.wizardSpellMasteryArray[i]))
+				if (i < characterInfo.wizardSpellMasteryArray.length){
+					notesCell.appendChild(document.createTextNode(", "))
+				}
+			}
+			notesRow.appendChild(notesCell)
+			table.appendChild(notesRow)
+		}
 	}

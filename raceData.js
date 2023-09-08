@@ -254,11 +254,11 @@
 				else {
 					characterInfo.skillBonuses["Craft (Alchemy)"] += 2
 				}
-				characterInfo.features.push("Speak with Animals (Burrowing Mammals), 1/day Duration 1 minute")
+				characterInfo.features.push("Spell-Like Ability: Speak with Animals (Burrowing Mammals), 1/day Duration 1 minute")
 				if (characterInfo.charisma >= 10){
-					characterInfo.features.push("Dancing Lights 1/day")
-					characterInfo.features.push("Ghost Sound 1/day")
-					characterInfo.features.push("Prestidigitation 1/day")
+					characterInfo.features.push("Spell-Like Ability: Dancing Lights 1/day")
+					characterInfo.features.push("Spell-Like Ability: Ghost Sound 1/day")
+					characterInfo.features.push("Spell-Like Ability: Prestidigitation 1/day")
 				}
 			},
 			automaticLanguages: ["Common", "Gnome"],

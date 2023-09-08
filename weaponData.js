@@ -26,7 +26,8 @@ const weaponData = {
 		cost: 200,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProfiency: true,
+		thrownWeapon: true
 	},
 	"Punching Dagger": {
 		purchasable: true,
@@ -77,7 +78,8 @@ const weaponData = {
 		hasPurchaseCap: true,
 		purchaseCap: 1,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProfiency: true,
+		thrownWeapon: true
 	},
 	"Heavy Mace": {
 		purchasable: true,
@@ -107,7 +109,8 @@ const weaponData = {
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProfiency: true,
+		thrownWeapon: true
 	},
 	"Longspear": {
 		purchasable: true,
@@ -138,7 +141,8 @@ const weaponData = {
 		cost: 200,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProfiency: true,
+		thrownWeapon: true
 	},
 	"Heavy Crossbow": {
 		purchasable: true,
@@ -170,7 +174,8 @@ const weaponData = {
 		cost: 50,
 		hasPurchaseCap: false,
 		consumable: true,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProfiency: true,
+		thrownWeapon: true
 	},
 	"Javelin": {
 		purchasable: true,
@@ -180,7 +185,8 @@ const weaponData = {
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: true,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProfiency: true,
+		thrownWeapon: true
 	},
 	"Sling": {
 		purchasable: true,
@@ -212,7 +218,8 @@ const weaponData = {
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProfiency: true,
+		thrownWeapon: true
 	},
 	"Handaxe": {
 		purchasable: true,
@@ -362,7 +369,8 @@ const weaponData = {
 		cost: 1500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProfiency: true,
+		thrownWeapon: true
 	},
 	"Warhammer": {
 		purchasable: true,
@@ -663,7 +671,7 @@ const weaponData = {
 	"Bolas": {
 		purchasable: true,
 		proficiencyType: "Exotic",
-		subtype: "Ranged",
+		subtype: "Ranged Weapon",
 		hasAmmunition: false,
 		cost: 500,
 		hasPurchaseCap: false,
@@ -673,7 +681,7 @@ const weaponData = {
 	"Hand Crossbow": {
 		purchasable: true,
 		proficiencyType: "Exotic",
-		subtype: "Ranged",
+		subtype: "Ranged Weapon",
 		hasAmmunition: true,
 		ammunition: "Bolt",
 		cost: 10000,
@@ -684,7 +692,7 @@ const weaponData = {
 	"Repeating Heavy Crossbow": {
 		purchasable: true,
 		proficiencyType: "Exotic",
-		subtype: "Ranged",
+		subtype: "Ranged Weapon",
 		hasAmmunition: true,
 		ammunition: "Bolt",
 		cost: 40000,
@@ -695,7 +703,7 @@ const weaponData = {
 	"Repeating Light Crossbow": {
 		purchasable: true,
 		proficiencyType: "Exotic",
-		subtype: "Ranged",
+		subtype: "Ranged Weapon",
 		hasAmmunition: true,
 		ammunition: "Bolt",
 		cost: 25000,
@@ -706,21 +714,23 @@ const weaponData = {
 	"Net": {
 		purchasable: true,
 		proficiencyType: "Exotic",
-		subtype: "Ranged",
+		subtype: "Ranged Weapon",
 		hasAmmunition: false,
 		cost: 2000,
 		hasPurchaseCap: false,
 		consumable: true,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProfiency: true,
+		thrownWeapon: true
 	},
 	"Shuriken": {
 		purchasable: true,
 		proficiencyType: "Exotic",
-		subtype: "Ranged",
+		subtype: "Ranged Weapon",
 		hasAmmunition: false,
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: true,
-		hasUniqueWeaponProfiency: true 
+		hasUniqueWeaponProfiency: true,
+		thrownWeapon: true
 	}
 }

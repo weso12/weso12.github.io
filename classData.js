@@ -53,6 +53,7 @@
 			skillPoints: 6,
 			trainingAge: "Medium",
 			fullCaster: true,
+			castingType: "Arcane",
 			spellsAlignmentRestricted: false,
 			knowsAllSpells: false,
 			castingAttribute: "Charisma",
@@ -143,6 +144,7 @@
 			hitDie: 8,
 			skillPoints: 2,
 			fullCaster: true,
+			castingType: "Divine",
 			trainingAge: "Hard",
 			spellsAlignmentRestricted: true,
 			knowsAllSpells: true,
@@ -239,7 +241,7 @@
 						godData[characterInfo.godWorshiped].alignment === "Chaotic Good")) ||
 						characterInfo.clericDomains.includes("Good") ||
 						(characterInfo.clericDomains.includes("Sun") &&
-						document.getElementById("basicfiltering").checked)) && calculateModifer(characterInfo.charisma) > -3){
+						document.getElementById("basicfiltering").checked)) && calculateModifier(characterInfo.charisma) > -3){
 						characterInfo.features.push("Turn Undead")
 					}
 					else if (((characterInfo.godWorshiped !== "None" &&
@@ -247,10 +249,10 @@
 						godData[characterInfo.godWorshiped].alignment === "Neutral Good" ||
 						godData[characterInfo.godWorshiped].alignment === "Chaotic Good")) ||
 						characterInfo.clericDomains.includes("Evil"))
-						 && calculateModifer(characterInfo.charisma) > -3){
+						 && calculateModifier(characterInfo.charisma) > -3){
 						characterInfo.features.push("Rebuke Undead")
 					}
-					else if (calculateModifer(characterInfo.charisma) > -3 && Math.floor(Math.random() * 2) === 0){
+					else if (calculateModifier(characterInfo.charisma) > -3 && Math.floor(Math.random() * 2) === 0){
 						characterInfo.features.push("Turn Undead")
 						if (characterInfo.godWorshiped !== "We Jas"){
 							narrowAlignment(characterInfo, ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "Neutral", "Chaotic Neutral"])
@@ -259,7 +261,7 @@
 							narrowAlignment(characterInfo, ["Lawful Good"])
 						}
 					}
-					else if (calculateModifer(characterInfo.charisma) > -3){
+					else if (calculateModifier(characterInfo.charisma) > -3){
 						characterInfo.features.push("Rebuke Undead")
 						narrowAlignment(characterInfo, ["Lawful Neutral", "Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil"])
 					}
@@ -326,6 +328,7 @@
 			hitDie: 8,
 			skillPoints: 4,
 			fullCaster: true,
+			castingType: "Divine",
 			trainingAge: "Hard",
 			spellsAlignmentRestricted: true,
 			knowsAllSpells: true,
@@ -455,6 +458,8 @@
 					if (!characterInfo.languagesKnown.includes("Druidic")){
 						characterInfo.languagesKnown.push("Druidic")
 					}
+					grantSkillBonus(characterInfo, "Knowledge (Nature)", 2)
+					grantSkillBonus(characterInfo, "Survival", 2)
 					if (characterInfo.wisdom >= 10){
 						if (!characterInfo.spells){
 							characterInfo.spells = {}
@@ -603,6 +608,7 @@
 			trainingAge: "Medium",
 			fullCaster: false,
 			halfCaster: true,
+			castingType: "Divine",
 			spellsAlignmentRestricted: false,
 			knowsAllSpells: true,
 			castingAttribute: "Wisdom",
@@ -652,6 +658,7 @@
 			trainingAge: "Medium",
 			fullCaster: false,
 			halfCaster: true,
+			castingType: "Divine",
 			spellsAlignmentRestricted: false,
 			knowsAllSpells: true,
 			castingAttribute: "Wisdom",
@@ -688,6 +695,7 @@
 					let favoredEnemyArray = ["Aberration", "Animal", "Construct", "Dragon", "Elemental", "Fey", "Giant", "Humanoid (aquatic)", "Humanoid (dwarf)", "Humanoid (elf)", "Humanoid (goblinoid)", "Humanoid (gnoll)", "Humanoid (gnome)", "Humanoid (halfling)", "Humanoid (human)", "Humanoid (orc)", "Humanoid (reptilian)", "Magical Beast", "Monstrous humanoid", "Ooze", "Outsider (air)", "Outsider (chaotic)", "Outsider (earth)", "Outsider (evil)", "Outsider (fire)", "Outsider (good)", "Outsider (lawful)", "Outsider (native)", "Outsider (water)", "Plant", "Undead", "Vermin"]
 					characterInfo.favoredEnemy = favoredEnemyArray[Math.floor(Math.random() * favoredEnemyArray.length)]
 					characterInfo.features.push("Wild Empathy")
+					addFeat(characterInfo, "Track")
 				}
 
 			],
@@ -759,13 +767,14 @@
 			skillPoints: 2,
 			trainingAge: "Easy",
 			fullCaster: true,
+			castingType: "Arcane",
 			spellsAlignmentRestricted: false,
 			knowsAllSpells: false,
 			castingAttribute: "Charisma",
 			classSkills: ["Bluff", "Concentration", "Craft", "Knowledge (Arcana)", "Profession", "Spellcraft"],
 			spellList: [
 				["Resistance", "Acid Splash", "Detect Poison", "Detect Magic", "Read Magic", "Daze", "Dancing Lights", "Flare", "Light", "Ray of Frost", "Ghost Sound", "Disrupt Undead", "Touch of Fatigue", "Mage Hand", "Mending", "Message", "Open/Close", "Arcane Mark", "Prestidigitation"],
-				["Alarm", "Endure Elements", "Hold Portal", "Protection from Chaos", "Protection from Evil", "Protection from Good", "Protection from Law", "Shield", "Grease", "Mage Armor", "Mount", "Obscuring Mist", "Summon Monster I", "Unseen Servant", "Comprehend Languages", "Detect Secret Doors", "Detect Undead", "Indentify", "True Strike", "Charm Person", "Hypnotism", "Sleep", "Burning Hands", "Magic Missile", "Shocking Grasp", "Tenser's Floating Disk", "Color Spray", "Disguise Self", "Nystul's Magic Aura", "Silent Image", "Ventriloquism", "Cause Fear", "Chill Touch", "Ray of Enfeeblement", "Animate Rope", "Enlarge Person", "Erase", "Expeditious Retreat", "Feather Fall", "Jump", "Magic Weapon", "Reduce Person"]
+				["Alarm", "Endure Elements", "Hold Portal", "Protection from Chaos", "Protection from Evil", "Protection from Good", "Protection from Law", "Shield", "Grease", "Mage Armor", "Mount", "Obscuring Mist", "Summon Monster I", "Unseen Servant", "Comprehend Languages", "Detect Secret Doors", "Detect Undead", "Identify", "True Strike", "Charm Person", "Hypnotism", "Sleep", "Burning Hands", "Magic Missile", "Shocking Grasp", "Tenser's Floating Disk", "Color Spray", "Disguise Self", "Nystul's Magic Aura", "Silent Image", "Ventriloquism", "Cause Fear", "Chill Touch", "Ray of Enfeeblement", "Animate Rope", "Enlarge Person", "Erase", "Expeditious Retreat", "Feather Fall", "Jump", "Magic Weapon", "Reduce Person"]
 			],
 			weaponProficiency: {
 				allSimple: true
@@ -831,6 +840,7 @@
 			hitDie: 4,
 			skillPoints: 2,
 			fullCaster: true,
+			castingType: "Arcane",
 			trainingAge: "Hard",
 			spellsAlignmentRestricted: false,
 			knowsAllSpells: false,
@@ -840,7 +850,7 @@
 			"Knowledge (Nobility and Royalty)", "Knowledge (Religion)", "Knowledge (The Planes)", "Profession", "Spellcraft"],
 			spellList: [
 				["Resistance", "Acid Splash", "Detect Poison", "Detect Magic", "Read Magic", "Daze", "Dancing Lights", "Flare", "Light", "Ray of Frost", "Ghost Sound", "Disrupt Undead", "Touch of Fatigue", "Mage Hand", "Mending", "Message", "Open/Close", "Arcane Mark", "Prestidigitation"],
-				["Alarm", "Endure Elements", "Hold Portal", "Protection from Chaos", "Protection from Evil", "Protection from Good", "Protection from Law", "Shield", "Grease", "Mage Armor", "Mount", "Obscuring Mist", "Summon Monster I", "Unseen Servant", "Comprehend Languages", "Detect Secret Doors", "Detect Undead", "Indentify", "True Strike", "Charm Person", "Hypnotism", "Sleep", "Burning Hands", "Magic Missile", "Shocking Grasp", "Tenser's Floating Disk", "Color Spray", "Disguise Self", "Nystul's Magic Aura", "Silent Image", "Ventriloquism", "Cause Fear", "Chill Touch", "Ray of Enfeeblement", "Animate Rope", "Enlarge Person", "Erase", "Expeditious Retreat", "Feather Fall", "Jump", "Magic Weapon", "Reduce Person"]
+				["Alarm", "Endure Elements", "Hold Portal", "Protection from Chaos", "Protection from Evil", "Protection from Good", "Protection from Law", "Shield", "Grease", "Mage Armor", "Mount", "Obscuring Mist", "Summon Monster I", "Unseen Servant", "Comprehend Languages", "Detect Secret Doors", "Detect Undead", "Identify", "True Strike", "Charm Person", "Hypnotism", "Sleep", "Burning Hands", "Magic Missile", "Shocking Grasp", "Tenser's Floating Disk", "Color Spray", "Disguise Self", "Nystul's Magic Aura", "Silent Image", "Ventriloquism", "Cause Fear", "Chill Touch", "Ray of Enfeeblement", "Animate Rope", "Enlarge Person", "Erase", "Expeditious Retreat", "Feather Fall", "Jump", "Magic Weapon", "Reduce Person"]
 			],
 			weaponProficiency: {
 				"Club": true,
@@ -911,7 +921,16 @@
 									potentionalSpells.push(classData["Wizard"].spellList[1][i])
 								}
 							}
-							for (var i = 0; i < 3 + calculateModifer(characterInfo.intelligence); i++){
+							if (characterInfo.wizardSpeciality !== "None" && document.getElementById("specialistWizardSafety").checked){
+								let potentionalSpecialitySpells = []
+								for (var i = 0; i < classData["Wizard"].spellList[1].length; i++){
+									if (characterInfo.wizardSpeciality === spellData[classData["Wizard"].spellList[1][i]].college){
+										potentionalSpecialitySpells.push(classData["Wizard"].spellList[1][i])
+									}
+								}
+								characterInfo.spells["Wizard"][1].push(potentionalSpecialitySpells.splice(Math.floor(Math.random() * potentionalSpecialitySpells.length), 1)[0])
+							}
+							for (var i = (characterInfo.wizardSpeciality !== "None" && document.getElementById("specialistWizardSafety").checked) ? 1 : 0; i < 3 + calculateModifier(characterInfo.intelligence); i++){
 								characterInfo.spells["Wizard"][1].push(potentionalSpells.splice(Math.floor(Math.random() * potentionalSpells.length), 1)[0])
 							}
 						}
