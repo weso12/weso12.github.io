@@ -916,11 +916,6 @@
 						if (characterInfo.intelligence >= 11){
 							characterInfo.spells["Wizard"].push([])
 							let potentionalSpells = []
-							for (var i = 0; i < classData["Wizard"].spellList[1].length; i++){
-								if (characterInfo.wizardSpeciality === "None" || !characterInfo.barredWizardColleges.includes(spellData[classData["Wizard"].spellList[1][i]].college)){
-									potentionalSpells.push(classData["Wizard"].spellList[1][i])
-								}
-							}
 							if (characterInfo.wizardSpeciality !== "None" && document.getElementById("specialistWizardSafety").checked){
 								let potentionalSpecialitySpells = []
 								for (var i = 0; i < classData["Wizard"].spellList[1].length; i++){
@@ -930,6 +925,12 @@
 								}
 								characterInfo.spells["Wizard"][1].push(potentionalSpecialitySpells.splice(Math.floor(Math.random() * potentionalSpecialitySpells.length), 1)[0])
 							}
+							for (var i = 0; i < classData["Wizard"].spellList[1].length; i++){
+								if ((characterInfo.wizardSpeciality === "None" || !characterInfo.barredWizardColleges.includes(spellData[classData["Wizard"].spellList[1][i]].college)) && !characterInfo.spells["Wizard"][1].includes(classData["Wizard"].spellList[1][i])){
+									potentionalSpells.push(classData["Wizard"].spellList[1][i])
+								}
+							}
+
 							for (var i = (characterInfo.wizardSpeciality !== "None" && document.getElementById("specialistWizardSafety").checked) ? 1 : 0; i < 3 + calculateModifier(characterInfo.intelligence); i++){
 								characterInfo.spells["Wizard"][1].push(potentionalSpells.splice(Math.floor(Math.random() * potentionalSpells.length), 1)[0])
 							}

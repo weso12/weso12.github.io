@@ -444,7 +444,6 @@
 				for (var j = 0; j < subfeatsToCheck2.length; j++){
 					if (!characterInfo.featsKnown.includes(property + " (" + subfeatsToCheck2[j] + ")") || featData[featChosen].stacking){
 						if (document.getElementById("weighfeats").checked){
-
 							let weight = featData[featChosen].determineSubfeatWeight(characterInfo, subfeatsToCheck2[j])
 							for (var k = 0; k < weight; k++){
 								subfeatarray.push(subfeatsToCheck2[j])

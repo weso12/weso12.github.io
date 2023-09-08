@@ -847,28 +847,19 @@ const featData = {
 			return;
 		},
 		determineWeight: function(characterInfo){
-			let test = false;
-			for (var property in characterInfo.weaponProficiencies){
-				if (characterInfo.weaponProficiencies[property] === true && weaponData[characterInfo.weaponProficiencies[property]].subtype === "Ranged Weapon"){
-					test = true
-				}
-			}
-			if (!test){
-				return 1
-			}
 			let weight = 8;
 			weight += Math.floor(calculateModifier(characterInfo.dexterity)/2)
 			if (classData[characterInfo.class].baseAttackBonus === "Good"){
 				weight += 2
 			}
-			else if (classData[characterInfo.class].baseAttackBonus === "Good"){
+			else if (classData[characterInfo.class].baseAttackBonus === "Poor"){
 				weight -= 2
 			}
 		 	for (var i = 0; i < characterInfo.featsKnown.length; i++){
 		 		if (characterInfo.featsKnown[i].startsWith("Weapon Focus")){
 		 			for (var property in weaponData){
 		 				let weaponFocus = "Weapon Focus (";
-		 				if (weaponData[characterInfo.featsKnown[i].substring(weaponFocus.length, characterInfo.featsKnown[i].length - 1)].subtype === "Ranged Weapon"){
+		 				if (weaponData[characterInfo.featsKnown[i].substring(weaponFocus.length, characterInfo.featsKnown[i].length - 1)] && weaponData[characterInfo.featsKnown[i].substring(weaponFocus.length, characterInfo.featsKnown[i].length - 1)].subtype === "Ranged Weapon"){
 		 					weight += 2
 		 				}
 		 			}
