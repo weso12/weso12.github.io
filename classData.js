@@ -740,12 +740,12 @@
 				}
 			],
 			attributeWeights: {
-				strength: 10,
-				dexterity: 1,
-				constitution: 7,
-				wisdom:4,
-				intelligence: 1,
-				charisma: 7
+				strength: 50,
+				dexterity: 3,
+				constitution: 15,
+				wisdom:15,
+				intelligence: 2,
+				charisma: 15
 			},
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4)  +Math.floor(Math.random() * 4) + 6) * 1000
@@ -794,12 +794,12 @@
 			reflexSave: "Good",
 			willSave: "Poor",
 			attributeWeights: {
-				strength: 5,
-				dexterity: 5,
-				constitution: 4,
-				intelligence: 1,
-				wisdom: 4,
-				charisma: 1
+				strength: 25,
+				dexterity: 40,
+				constitution: 15,
+				intelligence: 5,
+				wisdom: 15,
+				charisma: 5
 			},
 			hasAlignmentRestrictions: false,
 			assignClassFeatures: [
@@ -866,10 +866,10 @@
 			hasAlignmentRestrictions: false,
 			attributeWeights: {
 				strength: 3,
-				dexterity: 10,
-				constitution: 7,
-				intelligence: 7,
-				wisdom: 3,
+				dexterity: 60,
+				constitution: 15,
+				intelligence: 15,
+				wisdom: 2,
 				charisma: 5
 			},
 			assignClassFeatures: [

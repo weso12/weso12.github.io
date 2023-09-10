@@ -616,7 +616,7 @@
 				}
 				weight += calculateModifier(characterInfo.intelligence)
 				if (characterInfo.skillBonuses["Search"]){
-					weight += skillBonuses["Search"]
+					weight += characterInfo.skillBonuses["Search"]
 				}
 				return Math.max(weight, 1)
 			}
