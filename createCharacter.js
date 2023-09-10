@@ -474,7 +474,6 @@
 					}
 				}
 			}
-			console.log(featArray)
 			let featChosen = featArray[Math.floor(Math.random() * featArray.length)]
 			if (featData[featChosen].hasSubfeats){
 				let subfeatarray = []

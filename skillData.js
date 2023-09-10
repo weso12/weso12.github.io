@@ -93,7 +93,7 @@
 				let bonus = 0
 				for (var property in characterInfo.skillBonuses){
 					if (property.startsWith("Craft")){
-						bonus += skillBonuses[property]
+						bonus += characterInfo.skillBonuses[property]
 					}
 				}
 				weight += Math.floor(bonus/2)
@@ -532,7 +532,7 @@
 				let bonus = 0
 				weight += calculateModifier(characterInfo.Charimsa)
 				for (var property in characterInfo.skillBonuses){
-					if (characterInfo.skillBonuses[property].startsWith("Perform")){
+					if (property.startsWith("Perform")){
 						bonus += characterInfo.skillBonuses[property]
 					}
 				}
@@ -564,7 +564,7 @@
 				let bonus = 0
 				weight += calculateModifier(characterInfo.Wisdom)
 				for (var property in characterInfo.skillBonuses){
-					if (characterInfo.skillBonuses[property].startsWith("Profession")){
+					if (property.startsWith("Profession")){
 						bonus += characterInfo.skillBonuses[property]
 					}
 				}
