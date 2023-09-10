@@ -719,7 +719,7 @@ const featData = {
 			}
 			else {
 				for (var property in weaponData){
-					if (weaponData[property].proficiencyType === "Exotic" || !characterInfo.weaponProficiencies[property] && !characterInfo.features.includes("Weapon Familiarity (" + property + ")") && ((property !== "Bastard Sword" && property !== "War Axe") || characterInfo.strength >= 13)){
+					if (weaponData[property].proficiencyType === "Exotic" && !characterInfo.weaponProficiencies[property] && !characterInfo.features.includes("Weapon Familiarity (" + property + ")") && ((property !== "Bastard Sword" && property !== "War Axe") || characterInfo.strength >= 13)){
 						return true
 					}
 				}
@@ -733,7 +733,7 @@ const featData = {
 		generateSubfeats: function(characterInfo) {
 			let array = []
 			for (var property in weaponData){
-				if (weaponData[property].proficiencyType === "Exotic" || !characterInfo.weaponProficiencies[property] && !characterInfo.features.includes("Weapon Familiarity (" + property + ")") && ((property !== "Bastard Sword" && property !== "War Axe") || characterInfo.strength >= 13)){
+				if (weaponData[property].proficiencyType === "Exotic" && !characterInfo.weaponProficiencies[property] && !characterInfo.features.includes("Weapon Familiarity (" + property + ")") && ((property !== "Bastard Sword" && property !== "War Axe") || characterInfo.strength >= 13)){
 					array.push(property)
 				}
 			}
