@@ -20,8 +20,7 @@
 				RaceArray.push(property)
 			}
 		}
-	//	characterInfo.class = ClassArray[Math.floor(Math.random() * ClassArray.length)]
-		characterInfo.class = "Monk"
+		characterInfo.class = ClassArray[Math.floor(Math.random() * ClassArray.length)]
 		if (document.getElementById("weighraceselection").checked){
 			let raceRollArray = []
 			for (var i = 0; i < RaceArray.length; i++){
