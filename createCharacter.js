@@ -20,8 +20,21 @@
 				RaceArray.push(property)
 			}
 		}
-		characterInfo.class = ClassArray[Math.floor(Math.random() * ClassArray.length)]
-		characterInfo.race = RaceArray[Math.floor(Math.random() * RaceArray.length)]
+	//	characterInfo.class = ClassArray[Math.floor(Math.random() * ClassArray.length)]
+		characterInfo.class = "Monk"
+		if (document.getElementById("weighraceselection").checked){
+			let raceRollArray = []
+			for (var i = 0; i < RaceArray.length; i++){
+				let raceWeight = classData[characterInfo.class].determineRacialWeight(RaceArray[i])
+				for (var j = 0; j < raceWeight; j++){
+					raceRollArray.push(RaceArray[i])
+				}
+			}
+			characterInfo.race = raceRollArray[Math.floor(Math.random() * raceRollArray.length)]
+		}
+		else {
+			characterInfo.race = RaceArray[Math.floor(Math.random() * RaceArray.length)]
+		}
 		//Assign and Adjust Ability Scores
 		if (document.getElementById("weighattributes").checked){
 			array.sort(function(a,b){return b-a})
@@ -173,16 +186,34 @@
 			}
 		}
 		let skillRollArray = []
-		for (var property in skillData){
-			if (!characterInfo.features.includes("Illiteracy") || property !== "Forgery"){
-				if (characterInfo.classSkills.includes(property)){
-					for (var i = 0; i < parseInt(document.getElementById("classSkillWeight").value); i++){
-						skillRollArray.push(property)
+		if (document.getElementById("weighindividualskills").checked){
+			for (var property in skillData){
+				if (!characterInfo.features.includes("Illiteracy") || property !== "Forgery"){
+					if (characterInfo.classSkills.includes(property)){
+						for (var i = 0; i < parseInt(document.getElementById("classSkillWeight").value * skillData[property].determineWeight(characterInfo)); i++){
+							skillRollArray.push(property)
+						}
+					}
+					else {
+						for (var i = 0; i < parseInt(document.getElementById("crossClassSkillWeight").value * skillData[property].determineWeight(characterInfo)); i++){
+							skillRollArray.push(property)
+						}
 					}
 				}
-				else {
-					for (var i = 0; i < parseInt(document.getElementById("crossClassSkillWeight").value); i++){
-						skillRollArray.push(property)
+			}
+		}
+		else {
+			for (var property in skillData){
+				if (!characterInfo.features.includes("Illiteracy") || property !== "Forgery"){
+					if (characterInfo.classSkills.includes(property)){
+						for (var i = 0; i < parseInt(document.getElementById("classSkillWeight").value); i++){
+							skillRollArray.push(property)
+						}
+					}
+					else {
+						for (var i = 0; i < parseInt(document.getElementById("crossClassSkillWeight").value); i++){
+							skillRollArray.push(property)
+						}
 					}
 				}
 			}
@@ -248,11 +279,23 @@
 				else if (skillData[rollResults].hasSubskills){
 					let subskillArray = []
 					for (var i = 0; i < skillData[rollResults].subskills.length; i++){
-						if (!characterInfo.skillRanks[property + " (" + skillData[rollResults].subskills[i] + ")"]
-							&& (!document.getElementById("basicfiltering").checked || 
-							!(rollResults === "Craft" && skillData[rollResults].subskills[i] === "Alchemy") ||
-							classData[characterInfo.class].fullCaster)){
-							subskillArray.push(skillData[rollResults].subskills[i])
+						if (document.getElementById("weighindividualskills").checked){
+							if (!characterInfo.skillRanks[property + " (" + skillData[rollResults].subskills[i] + ")"]
+								&& (!document.getElementById("basicfiltering").checked || 
+								!(rollResults === "Craft" && skillData[rollResults].subskills[i] === "Alchemy") ||
+								classData[characterInfo.class].fullCaster)){
+								for (var i = 0; i < skillData[rollResults].determineSubskillWeight(characterInfo, skillData[rollResults].subskills[i]); i++){
+									subskillArray.push(skillData[rollResults].subskills[i])	
+								}
+							}
+						}
+						else {
+							if (!characterInfo.skillRanks[property + " (" + skillData[rollResults].subskills[i] + ")"]
+								&& (!document.getElementById("basicfiltering").checked || 
+								!(rollResults === "Craft" && skillData[rollResults].subskills[i] === "Alchemy") ||
+								classData[characterInfo.class].fullCaster)){
+								subskillArray.push(skillData[rollResults].subskills[i])
+							}
 						}
 					}
 					if (subskillArray.length === 0){
@@ -285,13 +328,13 @@
 						characterInfo.skillPoints = 0
 					}
 					else if (characterInfo.skillPoints < 4) {
-							characterInfo.skillPoints[rollResults] = characterInfo.skillPoints/2;
-							characterInfo.skillPoints = 0
+						characterInfo.skillPoints[rollResults] = characterInfo.skillPoints/2;
+						characterInfo.skillPoints = 0
 					}
 					else if (characterInfo.classSkills.includes(rollResults)){
-								characterInfo.skillRanks[rollResults] = 4;
-								characterInfo.skillPoints -= 4;
-							}
+						characterInfo.skillRanks[rollResults] = 4;
+						characterInfo.skillPoints -= 4;
+					}
 					else {
 						characterInfo.skillRanks[rollResults] = 2;
 						characterInfo.skillPoints -= 4;
@@ -360,14 +403,8 @@
 					}
 					else {
 						let subskillRoll = subskillArray[Math.floor(Math.random() * subskillArray.length)]
-						if (!characterInfo.skillRanks[rollResults + " (" + skillData[rollResults].subskills[i] + ")"] && characterInfo.classSkills.includes(rollResults)){
-							characterInfo.skillRanks[rollResults + " (" + subskillRoll + ")"] = 1
-						}
-						else if (!characterInfo.skillRanks[rollResults + " (" + skillData[rollResults].subskills[i] + ")"]){
+						if (!characterInfo.skillRanks[rollResults + " (" + skillData[rollResults].subskills[i] + ")"]){
 							characterInfo.skillRanks[rollResults + " (" + subskillRoll + ")"] = 0.5
-						}
-						else if (!document.getElementById("halfskillranks").checked) {
-							characterInfo.skillRanks[rollResults + " (" + subskillRoll + ")"]++
 						}
 						else {
 							characterInfo.skillRanks[rollResults + " (" + subskillRoll + ")"] += 0.5
@@ -437,6 +474,7 @@
 					}
 				}
 			}
+			console.log(featArray)
 			let featChosen = featArray[Math.floor(Math.random() * featArray.length)]
 			if (featData[featChosen].hasSubfeats){
 				let subfeatarray = []
@@ -486,7 +524,8 @@
 					}
 					else {
 						featArray.push(property)
-					}				}
+					}				
+				}
 			}
 			let featChosen = featArray[Math.floor(Math.random() * featArray.length)]
 			if (featData[featChosen].hasSubfeats){
@@ -820,6 +859,7 @@
 				let knowledgeCheckbox = document.createElement("INPUT")
 				knowledgeCheckbox.type = "checkbox"
 				knowledgeCheckbox.disabled = true
+				knowledgeCheckbox.id = "Knowlegde checkbox"
 				if (knowledgeClassSkillsNoRanksOrBonuses > knowledgeCrossClassSkillsNoRanksOrBonuses){
 					knowledgeCheckbox.checked = true
 				}
@@ -876,6 +916,7 @@
 				}
 				let checkbox = document.createElement("INPUT")
 				checkbox.type = "checkbox"
+				checkbox.id = property + " checkbox"
 				checkbox.disabled = true
 				if (characterInfo.classSkills.includes(property)){
 					checkbox.checked = true
@@ -951,6 +992,7 @@
 						let subSkillcheckbox = document.createElement("INPUT")
 						subSkillcheckbox.type = "checkbox"
 						subSkillcheckbox.disabled = true
+						subSkillcheckbox.id = property + " (" + skillData[property].subskills[i] + ") checkbox"
 						if (characterInfo.classSkills.includes(property)){
 							subSkillcheckbox.checked = true
 						}
@@ -1021,6 +1063,7 @@
 					}
 					let checkbox = document.createElement("INPUT")
 					checkbox.type = "checkbox"
+					checkbox.id = property + " checkbox"
 					checkbox.disabled = true
 					if (characterInfo.classSkills.includes(property)){
 						checkbox.checked = true
@@ -1093,6 +1136,7 @@
 				classSkillCheckboxCell.style.border = "1px solid black"
 				classSkillCheckboxCell.style.borderCollapse = "collapse"
 				classSkillCheckboxCell.style.textAlign = "center"
+				checkbox.id = property + " checkbox"
 				skillRow.appendChild(classSkillCheckboxCell)
 				let nameCell = document.createElement("TD")
 				nameCell.style.border = "1px solid black"

@@ -242,18 +242,9 @@
 				characterInfo.features.push("+1 to Difficulty Class all saving throws cast")
 				characterInfo.features.push("+1 Racial Bonus on attack rolls against Kobolds and Goblinoids")
 				characterInfo.features.push("+4 dodge bonus to Armor Class against giants")
-				if (characterInfo.skillBonuses["Listen"]){
-					characterInfo.skillBonuses["Listen"] = 2
-				}
-				else {
-					characterInfo.skillBonuses["Listen"] += 2
-				}
-				if (characterInfo.skillBonuses["Craft (Alchemy)"]){
-					characterInfo.skillBonuses["Craft (Alchemy)"] = 2
-				}
-				else {
-					characterInfo.skillBonuses["Craft (Alchemy)"] += 2
-				}
+				grantSkillBonus(characterInfo, "Listen", 2)
+				grantSkillBonus(characterInfo, "Hide", 4)
+				grantSkillBonus(characterInfo, "Craft (Alchemy", 2)
 				characterInfo.features.push("Spell-Like Ability: Speak with Animals (Burrowing Mammals), 1/day Duration 1 minute")
 				if (characterInfo.charisma >= 10){
 					characterInfo.features.push("Spell-Like Ability: Dancing Lights 1/day")
@@ -460,6 +451,7 @@
 				else {
 					characterInfo.skillBonuses["Move Silently"] += 2
 				}
+				grantSkillBonus(characterInfo, "Hide", 4)
 				characterInfo.fortitude += 1
 				characterInfo.reflex += 1
 				characterInfo.will += 1

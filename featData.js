@@ -18,7 +18,7 @@ const featData = {
 			if (characterInfo.classSkills.includes("Tumble")){
 				weight++;
 			}
-			weight += Math.floor((calculateSkillMod(characterInfo, "Jump") + calculateModifier(characterInfo, "Tumble"))/2)
+			weight += Math.floor((calculateSkillMod(characterInfo, "Jump") + calculateSkillMod(characterInfo, "Tumble"))/2)
 			return Math.max(weight, 1)
 		},
 		hasSubfeats: false,
@@ -44,7 +44,7 @@ const featData = {
 			if (characterInfo.classSkills.includes("Spot")){
 				weight++;
 			}
-			weight += Math.floor((calculateSkillMod(characterInfo, "Balance") + calculateModifier(characterInfo, "Spot"))/2)
+			weight += Math.floor((calculateSkillMod(characterInfo, "Balance") + calculateSkillMod(characterInfo, "Spot"))/2)
 			return Math.max(weight, 1)
 		},
 		hasSubfeats: false,
@@ -70,7 +70,7 @@ const featData = {
 			if (characterInfo.classSkills.includes("Spot")){
 				weight++;
 			}
-			weight += Math.floor((calculateSkillMod(characterInfo, "Listen") + calculateModifier(characterInfo, "Spot"))/2)
+			weight += Math.floor((calculateSkillMod(characterInfo, "Listen") + calculateSkillMod(characterInfo, "Spot"))/2)
 			return Math.max(weight, 1)
 		},
 		hasSubfeats: false,
@@ -96,7 +96,7 @@ const featData = {
 			if (characterInfo.classSkills.includes("Ride")){
 				weight++;
 			}
-			weight += Math.floor((calculateSkillMod(characterInfo, "Handle Animal") + calculateModifier(characterInfo, "Ride"))/2)
+			weight += Math.floor((calculateSkillMod(characterInfo, "Handle Animal") + calculateSkillMod(characterInfo, "Ride"))/2)
 			return Math.max(weight, 1)
 		},
 		hasSubfeats: false,
@@ -1016,7 +1016,7 @@ const featData = {
 			return true
 		},
 		commonSenseCheck: function(characterInfo){
-			return (calculateMaximumSpellLevel(characterInfo) >= 1)
+			return calculateMaximumSpellLevel(characterInfo) >= 1
 		},
 		determineWeight: function (characterInfo) {
 			let weight = 5
@@ -1034,7 +1034,7 @@ const featData = {
 				}
 			}
 			if (count === 0){
-				return 2
+				return 1
 			}
 			return weight + Math.floor(count/3)
 		},
@@ -1158,7 +1158,7 @@ const featData = {
 	},
 	"Improved Grapple": {
 		canLearn: function(characterInfo) {
-			return (characterInfo.dexterity > 13 && (characterInfo.featsKnown.includes("Improved Unarmed Strike") || characterInfo.features.includes("Unarmed Strike")))
+			return (characterInfo.dexterity >= 13 && characterInfo.featsKnown.includes("Improved Unarmed Strike"))
 		},
 		commonSenseCheck: function(characterInfo){
 			return true
@@ -1543,7 +1543,7 @@ const featData = {
 	},
 	"Mobility": {
 		canLearn:function(characterInfo){
-			return (characterInfo.dexterity >= 13 || characterInfo.featsKnown.includes("Dodge"))
+			return (characterInfo.dexterity >= 13 && characterInfo.featsKnown.includes("Dodge"))
 		},
 		commonSenseCheck: function (characterInfo) {
 			return true
@@ -2539,6 +2539,28 @@ const featData = {
 		},
 		stacking: false,
 		fighterBonusFeat: false 
+	},
+	"Stunning Fist": {
+		canLearn: function(characterInfo){
+			return (characterInfo.baseAttackBonus >= 8 && characterInfo.dexterity >= 13 && characterInfo.wisdom >= 13 && characterInfo.featsKnown.includes("Improved Unarmed Strike"))
+		},
+		commonSenseCheck: function(characterInfo){
+			return true
+		},
+		hasSubfeats: false,
+		uponLearning: function(characterInfo){
+			return
+		},
+		determineWeight: function(characterInfo){
+			let weight = 8
+			if (classData[characterInfo.class].baseAttackBonus === "Good"){
+				weight += 2
+			}
+			else if (classData[characterInfo.class].baseAttackBonus === "Poor"){
+				weight -= 2
+			}
+			return weight
+		}
 	},
 	"Toughness": {
 		canLearn: function(characterInfo){

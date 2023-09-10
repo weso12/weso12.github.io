@@ -46,6 +46,18 @@
 			],
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4) + 4) * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5
+				weight += raceData[race].attributeMods.Strength
+				weight += raceData[race].attributeMods.Constitution
+				if (raceData[race].favoredClass === "Barbarian"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				return Math.max(weight, 1)
 			}
 		},
 		"Bard": {
@@ -138,6 +150,18 @@
 			],
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4) + 4) * 1000 
+			},
+			determineRacialWeight: function(race){
+				let weight = 5
+				weight += raceData[race].attributeMods.Charisma
+				weight += Math.floor(raceData[race].attributeMods.Intelligence/2)
+				if (raceData[race].favoredClass === "Bard"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				return Math.max(weight, 1)
 			}
 		},
 		"Cleric": {
@@ -234,7 +258,6 @@
 							narrowAlignment(characterInfo, ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "Neutral", "Chaotic Neutral"])
 						}
 					}
-					const godWorshipedData = godData[characterInfo.godWorshiped]
 					if (((characterInfo.godWorshiped !== "None" &&
 						(godData[characterInfo.godWorshiped].alignment === "Lawful Good" ||
 						godData[characterInfo.godWorshiped].alignment === "Neutral Good" ||
@@ -245,9 +268,9 @@
 						characterInfo.features.push("Turn Undead")
 					}
 					else if (((characterInfo.godWorshiped !== "None" &&
-						(godData[characterInfo.godWorshiped].alignment === "Lawful Good" ||
-						godData[characterInfo.godWorshiped].alignment === "Neutral Good" ||
-						godData[characterInfo.godWorshiped].alignment === "Chaotic Good")) ||
+						(godData[characterInfo.godWorshiped].alignment === "Lawful Evil" ||
+						godData[characterInfo.godWorshiped].alignment === "Neutral Evil" ||
+						godData[characterInfo.godWorshiped].alignment === "Chaotic Evil")) ||
 						characterInfo.clericDomains.includes("Evil"))
 						 && calculateModifier(characterInfo.charisma) > -3){
 						characterInfo.features.push("Rebuke Undead")
@@ -322,6 +345,18 @@
 			],
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4) + 5) * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5
+				weight += raceData[race].attributeMods.Wisdom
+				weight += Math.floor(raceData[race].attributeMods.Charisma/2)
+				if (raceData[race].favoredClass === "Cleric"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				return Math.max(weight, 1)
 			}
 		},
 		"Druid": {
@@ -491,6 +526,20 @@
 			],
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + 2)  * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5
+				weight += Math.floor(raceData[race].attributeMods.Wisdom * 1.5)
+				if (raceData[race].favoredClass === "Druid"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				else if (race === "Elf") {
+					weight += 2
+				}
+				return Math.max(weight, 1)
 			}
 		},
 		"Fighter": {
@@ -511,12 +560,12 @@
 				towerShields: true
 			},
 			attributeWeights: {
-				strength: 10,
-				dexterity: 7,
-				constitution: 9,
-				wisdom:4,
+				strength: 50,
+				dexterity: 20,
+				constitution: 20,
+				wisdom: 4,
 				intelligence: 3,
-				charisma: 2
+				charisma: 3
 			},
 			baseAttackBonus: "Good",
 			fortitudeSave: "Good",
@@ -541,6 +590,21 @@
 			},
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4) + 6) * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5
+				weight += raceData[race].attributeMods.Strength
+				weight += Math.floor(raceData[race].attributeMods.Constitution/2)
+				if (raceData[race].favoredClass === "Fighter"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				else if (race === "Half-Orc") {
+					weight += 2
+				}
+				return Math.max(weight, 1)
 			}
 		},
 		"Monk": {
@@ -595,10 +659,46 @@
 					characterInfo.features.push("AC Bonus")
 					characterInfo.features.push("Flury of Blows")
 					characterInfo.features.push("Unarmed Strike")
+					addFeat(characterInfo, "Improved Unarmed Strike")
+					if (document.getElementById("weighfeats").checked){
+						let array = []
+						for (var i = 0; i < featData["Improved Grapple"].determineWeight(characterInfo); i++){
+							array.push("Improved Grapple")
+						}
+						for (var i = 0; i < featData["Stunning Fist"].determineWeight(characterInfo); i++){
+							array.push("Stunning Fist")
+						}
+						addFeat(characterInfo, array[Math.floor(Math.random() * array.length)])
+					}
+					else {
+						let roll = Math.floor(Math.random() * 2)
+						if (roll === 0){
+							addFeat(characterInfo, "Improved Grapple")
+						}
+						else {
+							addFeat(characterInfo, "Stunning Fist")
+						}
+					}
 				}
 			],
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4) + 5) * 100
+			},
+			determineRacialWeight: function(race){
+				let weight = 5;
+				weight += raceData[race].attributeMods.Strength
+				weight += raceData[race].attributeMods.Dexterity
+				weight += Math.floor(raceData[race].attributeMods.Wisdom)
+				if (raceData[race].favoredClass === "Monk"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				if (raceData[race].size === "Small"){
+					weight -= 2
+				}
+				return Math.max(weight, 1)
 			}
 
 		},
@@ -649,6 +749,19 @@
 			},
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4)  +Math.floor(Math.random() * 4) + 6) * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5;
+				weight += raceData[race].attributeMods.Strength
+				weight += raceData[race].attributeMods.Constitution
+				weight += Math.floor(raceData[race].attributeMods.Charisma)
+				if (raceData[race].favoredClass === "Paladin"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				return Math.max(weight, 1)
 			}
 
 		},
@@ -693,14 +806,31 @@
 				null,
 				function (characterInfo) {
 					let favoredEnemyArray = ["Aberration", "Animal", "Construct", "Dragon", "Elemental", "Fey", "Giant", "Humanoid (aquatic)", "Humanoid (dwarf)", "Humanoid (elf)", "Humanoid (goblinoid)", "Humanoid (gnoll)", "Humanoid (gnome)", "Humanoid (halfling)", "Humanoid (human)", "Humanoid (orc)", "Humanoid (reptilian)", "Magical Beast", "Monstrous humanoid", "Ooze", "Outsider (air)", "Outsider (chaotic)", "Outsider (earth)", "Outsider (evil)", "Outsider (fire)", "Outsider (good)", "Outsider (lawful)", "Outsider (native)", "Outsider (water)", "Plant", "Undead", "Vermin"]
-					characterInfo.favoredEnemy = favoredEnemyArray[Math.floor(Math.random() * favoredEnemyArray.length)]
+					let favoredEnemy = favoredEnemyArray[Math.floor(Math.random() * favoredEnemyArray.length)]
 					characterInfo.features.push("Wild Empathy")
+					characterInfo.features.push("Favored Enemy: " + favoredEnemy)
 					addFeat(characterInfo, "Track")
 				}
 
 			],
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4)  +Math.floor(Math.random() * 4) + 6) * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5;
+				weight += raceData[race].attributeMods.Strength
+				weight += raceData[race].attributeMods.Dexterity
+				weight += Math.floor(raceData[race].attributeMods.Wisdom)
+				if (raceData[race].favoredClass === "Ranger"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				else if (race === "Elf"){
+					weight += 2
+				}
+				return Math.max(weight, 1)
 			}
 
 		},
@@ -759,7 +889,20 @@
 			},
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) +Math.floor(Math.random() * 4) + 5) * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5;
+				weight += raceData[race].attributeMods.Dexterity
+				weight += Math.floor(raceData[race].attributeMods.Intelligence)
+				if (raceData[race].favoredClass === "Rogue"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				return Math.max(weight, 1)
 			}
+
 
 		},
 		"Sorcerer": {
@@ -799,6 +942,7 @@
 				wisdom: 1,
 				charisma: 42
 			},
+
 			assignClassFeatures: [
 				null,
 				function(characterInfo){
@@ -834,6 +978,17 @@
 			],
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + 3) * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5;
+				weight += Math.floor(raceData[race].attributeMods.Charisma * 1.5)
+				if (raceData[race].favoredClass === "Sorcerer"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				return Math.max(weight, 1)
 			}
 		},
 		"Wizard": {
@@ -944,6 +1099,20 @@
 			],
 			generateMoney:function(){
 				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4)+ 3) * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5;
+				weight += Math.floor(raceData[race].attributeMods.Intelligence * 1.5)
+				if (raceData[race].favoredClass === "Wizard"){
+					weight += 5
+				}
+				else if (raceData[race].favoredClass === "Any"){
+					weight += 2
+				}
+				if (race === "Half-Elf"){
+					weight += 2
+				}
+				return Math.max(weight, 1)
 			}
 		}
 	}

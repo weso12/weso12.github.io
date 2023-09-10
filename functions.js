@@ -43,44 +43,6 @@
 		total += calculateModifier(characterInfo[skillData[skill].attribute.toLowerCase()])
 		return total
 	}
-	function displayDraconicWizardReplacementOdds(){
-		if (document.getElementById("DraconicWizardReplacement").checked){
-			document.getElementById("WhereToAddDraconicReplacementOdds").innerHTML = ""
-		}
-		else {
-			let number = document.createElement("INPUT")
-			number.type = "number"
-			number.min = "0"
-			number.max = "100"
-			number.value = "50"
-			number.style.width = "35px"
-			number.id = "DraconicWizardReplacementOdds"
-			let label = document.createElement("LABEL")
-			label.for = "DraconicWizardReplacementOdds"
-			label.appendChild(document.createTextNode("% of Wizards who replace bonus language with Draconic"))
-			let span = document.getElementById("WhereToAddDraconicReplacementOdds")
-			span.appendChild(number)
-			span.appendChild(label)
-			span.appendChild(document.createElement("BR"))
-		}
-	}
-	function displayAllowOverflowToIncludeSecretCheckBox(){
-		if (document.getElementById("bonusLanguagesOverflow").checked){
-			let checkbox = document.createElement("INPUT");
-			checkbox.type = "checkbox";
-			checkbox.id = "OverflowSecretLanguages";
-			let label = document.createElement("LABEL");
-			label.for = "OverflowSecretLanguages";
-			label.appendChild(document.createTextNode("Allow extra bonus languages to be secret langauges"))
-			let span = document.getElementById("WhereToAddOverflowIncludeSecretLanguages")
-			span.appendChild(checkbox)
-			span.appendChild(label)
-			span.appendChild(document.createElement("BR"))
-		}
-		else {
-			document.getElementById("WhereToAddOverflowIncludeSecretLanguages").innerHTML = ""
-		}
-	}
 	function compareFunction(a, b){
 		const nameA = a.toUpperCase()
 		const nameB = b.toUpperCase()
