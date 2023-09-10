@@ -573,8 +573,11 @@ const featData = {
 				let weight = 5;
 				let empowerableSpells = 0
 				for (var property in characterInfo.spells){
-					for (var i = 0; i <= characterInfo.spells[property].length - 2; i++){
-						for (var j = 0; j <= characterInfo.spells[property][i].length; j++){
+					for (var i = 0; i < characterInfo.spells[property].length - 2; i++){
+						if (characterInfo.spells[property][i] === null){
+							continue
+						}
+						for (var j = 0; j < characterInfo.spells[property][i].length; j++){
 							if (spellData[characterInfo.spells[property][i][j]].empowerable){
 								empowerableSpells++;
 							}
@@ -627,10 +630,13 @@ const featData = {
 		commonSenseCheck: function(characterInfo){
 			for (property in characterInfo.spells){
 				for (var i = 0; i < characterInfo.spells[property].length - 1; i++){
-					for (var j = 0; j < characterInfo.spells[property][i]; j < 0){
-						if (spellData[characterInfo.spell[property][i]].range === "Close" ||
-							spellData[characterInfo.spell[property][i]].range === "Medium" ||
-							spellData[characterInfo.spell[property][i]].range === "Long"){
+					if (characterInfo.spells[property][i] === null){
+						continue
+					}
+					for (var j = 0; j < characterInfo.spells[property][i].length; j++){
+						if (spellData[characterInfo.spells[property][i][j]].range === "Close" ||
+							spellData[characterInfo.spells[property][i][j]].range === "Medium" ||
+							spellData[characterInfo.spells[property][i][j]].range === "Long"){
 							return true
 						}
 				}
@@ -646,10 +652,13 @@ const featData = {
 			let elligbleSpells = 0;
 			for (property in characterInfo.spells){
 				for (var i = 0; i < characterInfo.spells[property].length - 1; i++){
-					for (var j = 0; j <characterInfo.spells[property][i].length; j++){
-						if (spellData[characterInfo.spell[property][i]].range === "Close" ||
-							spellData[characterInfo.spell[property][i]].range === "Medium" ||
-							spellData[characterInfo.spell[property][i]].range === "Long"){
+					if (characterInfo.spells[property][i] === null){
+						continue
+					}
+					for (var j = 0; j < characterInfo.spells[property][i].length; j++){
+						if (spellData[characterInfo.spells[property][i][j]].range === "Close" ||
+							spellData[characterInfo.spells[property][i][j]].range === "Medium" ||
+							spellData[characterInfo.spells[property][i][j]].range === "Long"){
 							elligbleSpells++;
 						}
 					}
@@ -1655,17 +1664,17 @@ const featData = {
 		hasSubfeats: false,
 		uponLearning: function (characterInfo) {
 			grantSkillBonus(characterInfo, "Disable Device", 2)
-			grantSkillBonus(characterInfo, "Open Locks", 2)
+			grantSkillBonus(characterInfo, "Open Lock", 2)
 		},
 		determineWeight: function (characterInfo) {
 			let weight = 3
 			if (characterInfo.classSkills.includes("Disable Device")){
 				weight++
 			}
-			if (characterInfo.classSkills.includes("Open Locks")){
+			if (characterInfo.classSkills.includes("Open Lock")){
 				weight++
 			}
-			weight += Math.floor((calculateSkillMod(characterInfo, "Disable Device") + calculateSkillMod(characterInfo, "Open Locks"))/2)
+			weight += Math.floor((calculateSkillMod(characterInfo, "Disable Device") + calculateSkillMod(characterInfo, "Open Lock"))/2)
 			return Math.max(weight, 1)
 		},
 		fighterBonusFeat: false
@@ -2530,9 +2539,11 @@ const featData = {
 		},
 		determineWeight: function (characterInfo) {
 			let count = 0
-			for (var i = 0; i < characterInfo.spells[characterInfo.class][0].length - 1; i++){
-				if (spellData[characterInfo.spells[characterInfo.class][0][i]].somaticComponent){
-					return true
+			for (var property in characterInfo.spells){
+				for (var i = 0; i < characterInfo.spells[property][0].length - 1; i++){
+					if (spellData[characterInfo.spells[property][0][i]].somaticComponent){
+						return true
+					}
 				}
 			}
 			return false

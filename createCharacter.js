@@ -462,7 +462,7 @@
 				if (featData[property].canLearn(characterInfo) && (!document.getElementById("basicfiltering").checked || featData[property].commonSenseCheck(characterInfo)) &&
 				(featData[property].stacking || featData[property].hasSubfeats || !characterInfo.featsKnown.includes(property)) &&
 				((!featData[property].hasSubfeats || !featData[property].stacking) || test)){
-					if (document.getElementById("weighfeats")){
+					if (document.getElementById("weighfeats").checked){
 						let weight = featData[property].determineWeight(characterInfo)
 						for (var j = 0; j < weight; j++){
 							featArray.push(property)
@@ -968,6 +968,7 @@
 				if (characterInfo.skillBonuses[property]){
 					skillModTotal += characterInfo.skillBonuses[property]
 				}
+				skillModTotal = Math.floor(skillModTotal)
 				let skillModTotalCell = document.createElement("TD")
 				skillModTotalCell.style.border = "1px solid black"
 				skillModTotalCell.style.borderCollapse = "collapse"
@@ -1044,6 +1045,7 @@
 						if (characterInfo.skillBonuses[property + " (" + skillData[property].subskills[i] + ")"]){
 							subskillModTotal += characterInfo.skillBonuses[property + " (" + skillData[property].subskills[i] + ")"]
 						}
+						subskillModTotal = Math.floor(subskillModTotal)
 						let subskillModTotalCell = document.createElement("TD")
 						subskillModTotalCell.style.border = "1px solid black"
 						subskillModTotalCell.style.borderCollapse = "collapse"
@@ -1334,7 +1336,7 @@
 			table.appendChild(specialityRow)
 
 		}
-		if (classData[characterInfo.class].fullCaster){
+		if (classData[characterInfo.class].fullCaster && characterInfo[classData[characterInfo.class].castingAttribute.toLowerCase()] >= 10){
 			for (var i = 0; i < characterInfo.spells[characterInfo.class].length; i++){
 				let spellsKnownRow = document.createElement("TR")
 				if (i === 0 && characterInfo.class !== "Wizard" && characterInfo.class !== "Cleric"){
