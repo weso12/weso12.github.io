@@ -283,7 +283,7 @@
 								&& (!document.getElementById("basicfiltering").checked || 
 								!(rollResults === "Craft" && skillData[rollResults].subskills[i] === "Alchemy") ||
 								classData[characterInfo.class].fullCaster)){
-								for (var i = 0; i < skillData[rollResults].determineSubskillWeight(characterInfo, skillData[rollResults].subskills[i]); i++){
+								for (var j = 0; j < skillData[rollResults].determineSubskillWeight(characterInfo, skillData[rollResults].subskills[i]); j++){
 									subskillArray.push(skillData[rollResults].subskills[i])	
 								}
 							}

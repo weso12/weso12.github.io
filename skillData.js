@@ -114,7 +114,7 @@
 				else if (characterInfo.features.includes("+2 racial bonus on Craft checks that are related to stone or metal") && subskill === "Sculpting"){
 					weight++
 				}
-				return weight
+				return Math.max(weight, 1)
 			}
 		},
 		"Decipher Script": {
@@ -530,7 +530,7 @@
 			determineWeight: function(characterInfo){
 				let weight = 5
 				let bonus = 0
-				weight += calculateModifier(characterInfo.Charimsa)
+				weight += calculateModifier(characterInfo.charimsa)
 				for (var property in characterInfo.skillBonuses){
 					if (property.startsWith("Perform")){
 						bonus += characterInfo.skillBonuses[property]
@@ -562,14 +562,14 @@
 			determineWeight: function(characterInfo){
 				let weight = 5
 				let bonus = 0
-				weight += calculateModifier(characterInfo.Wisdom)
+				weight += calculateModifier(characterInfo.wisdom)
 				for (var property in characterInfo.skillBonuses){
 					if (property.startsWith("Profession")){
 						bonus += characterInfo.skillBonuses[property]
 					}
 				}
 				weight += Math.floor(bonus/2)
-				return weight
+				return Math.max(weight, 1)
 			},
 			determineSubskillWeight: function(characterInfo, subskill){
 				let weight = 5
@@ -579,7 +579,7 @@
 				if (subskill === "Miner" && characterInfo.race === "Dwarf"){
 					weight += 5
 				}
-				return weight
+				return Math.max(weight, 1)
 			}
 		},
 		"Ride": {
