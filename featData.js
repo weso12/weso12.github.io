@@ -2739,7 +2739,7 @@ const featData = {
 		generateSubfeats: function (characterInfo) {
 			let array = [];
 			for (var property in weaponData){
-				if (canUseWeapon(characterInfo, property)){
+				if (canUseWeapon(characterInfo, property) && weaponData[property].hasUniqueWeaponProficiency){
 					array.push(property)
 				}
 			}

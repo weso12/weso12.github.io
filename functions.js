@@ -115,7 +115,7 @@
 			if (characterInfo.clericDomains.includes("Law")){
 				return false
 			}
-			else if (characterInfo.godWorshiped !== "None" && (godData[characterInfo.godWorshiped].alignment === "Lawful Good" || godData[characterInfo.godWorshiped].alignment === "Lawful Neutral" || godData[characterInfo.godWorshiped].alignment === "Lawful Evil")){
+			else if (characterInfo.godWorshiped !== "None" && godData[characterInfo.godWorshiped].alignment.includes("Lawful")){
 				return false
 			}
 			else {
@@ -126,7 +126,7 @@
 			if (characterInfo.clericDomains.includes("Good")){
 				return false
 			}
-			else if (characterInfo.godWorshiped !== "None" && (godData[characterInfo.godWorshiped].alignment === "Lawful Good" || godData[characterInfo.godWorshiped].alignment === "Neutral Good" || godData[characterInfo.godWorshiped].alignment === "Choatic Good")){
+			else if (characterInfo.godWorshiped !== "None" && (godData[characterInfo.godWorshiped].alignment.includes("Good"))){
 				return false
 			}
 			else {
@@ -138,7 +138,7 @@
 			if (characterInfo.clericDomains.includes("Evil")){
 				return false
 			}
-			else if (characterInfo.godWorshiped !== "None" && (godData[characterInfo.godWorshiped].alignment === "Lawful Evil" || godData[characterInfo.godWorshiped].alignment === "Neutral Evil" || godData[characterInfo.godWorshiped].alignment === "Lawful Evil")){
+			else if (characterInfo.godWorshiped !== "None" && godData[characterInfo.godWorshiped].alignment.includes("Evil")){
 				return false
 			}
 			else {
@@ -150,12 +150,29 @@
 			if (characterInfo.clericDomains.includes("Chaos")){
 				return false
 			}
-			else if (characterInfo.godWorshiped !== "None" && (godData[characterInfo.godWorshiped].alignment === "Chaotic Good" || godData[characterInfo.godWorshiped].alignment === "Chaotic Neutral" || godData[characterInfo.godWorshiped].alignment === "Chaotic Evil")){
+			else if (characterInfo.godWorshiped !== "None" && godData[characterInfo.godWorshiped].alignment.includes("Chaotic")){
 				return false
 			}
 			else {
 				return true
 			}
 		}
-
+	}
+	function showOnlyNPCClassesOptions(){
+		if (document.getElementById("allowNPCClasses").checked){
+			let span = document.getElementById("whereOnlyNPCClassOptionAppears")
+			let checkbox = document.createElement("INPUT")
+			checkbox.type = "checkbox"
+			checkbox.id = "onlyNPCClasses"
+			checkbox.name = "onlyNPCClasses"
+			let label = document.createElement("LABEL")
+			label.for = "onlyNPCClasses"
+			label.appendChild(document.createTextNode("Include Only NPC Classes"))
+			span.appendChild(document.createElement("BR"))
+			span.appendChild(checkbox)
+			span.appendChild(label)
+		}
+		else {
+			document.getElementById("whereOnlyNPCClassOptionAppears").innerHTML = ""
+		}
 	}

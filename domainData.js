@@ -219,7 +219,7 @@
 					else if (characterInfo.alignment === "Neutral"){
 						let weaponArray = []
 						for (var property in weaponData){
-							if (weaponData[property].hasUniqueWeaponProfiency && (weaponData[property].profiencyType === "Simple" || weaponData[property].profiencyType === "Martial" || (weaponData[property].profiencyType === "Exotic" && characterInfo.features.includes("Weapon Familiarity (" + property + ")")))){
+							if (weaponData[property].hasUniqueWeaponProficiency && (weaponData[property].proficiencyType === "Simple" || weaponData[property].proficiencyType === "Martial" || (weaponData[property].proficiencyType === "Exotic" && characterInfo.features.includes("Weapon Familiarity (" + property + ")")))){
 								weaponArray.push(property)
 							}
 						}
@@ -230,7 +230,7 @@
 					}
 					else if (characterInfo.alignment === "Lawful Evil"){
 						if (Math.floor(Math.random() * 2) === 0){
-							if (Math.floor(Math.ranodm() * 2) === 0){
+							if (Math.floor(Math.random() * 2) === 0){
 								weapon = "Flail"
 							}
 							else {
@@ -251,7 +251,7 @@
 					}
 					else if (characterInfo.alignment === "Chaotic Evil") {
 						if (Math.floor(Math.random() * 2) === 0){
-							if (Math.floor(Math.ranodm() * 2) === 0){
+							if (Math.floor(Math.random() * 2) === 0){
 								weapon = "Flail"
 							}
 							else {
@@ -266,7 +266,7 @@
 				else {
 					weapon = godData[characterInfo.godWorshiped].favoredWeapon[Math.floor(Math.random() * godData[characterInfo.godWorshiped].favoredWeapon.length)]
 				}
-				if (weaponData[weapon].profiencyType === "Martial" || (weaponData[weapon].profiencyType === "Exotic" && characterInfo.features.includes("Weapon Familiarity (" + property + ")")) && (!characterInfo.weaponProficiencies.allMartial || !characterInfo.weaponProficiencies[weapon])){
+				if (weaponData[weapon].proficiencyType === "Martial" || (weaponData[weapon].proficiencyType === "Exotic" && characterInfo.features.includes("Weapon Familiarity (" + property + ")")) && (!characterInfo.weaponProficiencies.allMartial || !characterInfo.weaponProficiencies[weapon])){
 					addFeat(characterInfo, "Martial Weapon Proficiency", weapon)
 				}
 				addFeat(characterInfo, "Weapon Focus", weapon)

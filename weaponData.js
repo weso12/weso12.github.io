@@ -7,7 +7,31 @@ const weaponData = {
 		cost: 200,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		weight: 1,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Gauntlet")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Improved Unarmed Strike")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Weapon Focus (Gauntlet)")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Weapon Finesse")){
+				weight += 2
+				weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength)) * 2 
+			}
+			else {
+				weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			}
+			return Math.max(weight, 1)
+		},
+		uponPurchasing: function(characterInfo){
+			return
+		}
 	},
 	"Unarmed Strike": {
 		purchasable: false,
@@ -16,7 +40,7 @@ const weaponData = {
 		hasAmmunition: false,
 		cost: 0,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Dagger": {
 		purchasable: true,
@@ -26,8 +50,32 @@ const weaponData = {
 		cost: 200,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true,
-		thrownWeapon: true
+		hasUniqueWeaponProficiency: true,
+		thrownWeapon: true,
+		weight: 1,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Dagger")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Dagger)")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Weapon Finesse")){
+				weight += 2
+				weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength)) * 2 
+			}
+			else {
+				weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			}
+			if (characterInfo.featsKnown.includes("Power Attack")){
+				weight -= 5
+			}
+			return Math.max(weight, 1)
+		},
+		uponPurchasing: function (characterInfo) {
+			return
+		}
 	},
 	"Punching Dagger": {
 		purchasable: true,
@@ -37,7 +85,27 @@ const weaponData = {
 		cost: 200,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Punching Dagger")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Punching Dagger")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Weapon Finesse")){
+				weight += 2
+				weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength)) * 2 
+			}
+			else {
+				weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			}
+			if (characterInfo.featsKnown.includes("Power Attack")){
+				weight -= 5
+			}
+			return Math.max(weight, 1)
+		}
 	},
 	"Spiked Gauntlet": {
 		purchasable: true,
@@ -47,7 +115,27 @@ const weaponData = {
 		cost: 500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Spiked Gauntlet")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Spiked Gauntlet")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Weapon Finesse")){
+				weight += 2
+				weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength)) * 2 
+			}
+			else {
+				weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			}
+			if (characterInfo.featsKnown.includes("Power Attack")){
+				weight -= 5
+			}
+			return Math.max(weight, 1)
+		}
 	},
 	"Light Mace": {
 		purchasable: true,
@@ -57,7 +145,27 @@ const weaponData = {
 		cost: 500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Light Mace")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Light Mace")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Weapon Finesse")){
+				weight += 2
+				weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength)) * 2 
+			}
+			else {
+				weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			}
+			if (characterInfo.featsKnown.includes("Power Attack")){
+				weight -= 5
+			}
+			return Math.max(weight, 1)
+		}
 	},
 	"Sickle": {
 		purchasable: true,
@@ -67,7 +175,27 @@ const weaponData = {
 		cost: 500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Sickle")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Sickle")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Weapon Finesse")){
+				weight += 2
+				weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength)) * 2 
+			}
+			else {
+				weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			}
+			if (characterInfo.featsKnown.includes("Power Attack")){
+				weight -= 5
+			}
+			return Math.max(weight, 1)
+		}
 	},
 	"Club": {
 		purchasable: true,
@@ -78,8 +206,19 @@ const weaponData = {
 		hasPurchaseCap: true,
 		purchaseCap: 1,
 		consumable: false,
-		hasUniqueWeaponProfiency: true,
-		thrownWeapon: true
+		hasUniqueWeaponProficiency: true,
+		thrownWeapon: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Club")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Club)")){
+				weight += 5
+			}
+			weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Heavy Mace": {
 		purchasable: true,
@@ -89,7 +228,18 @@ const weaponData = {
 		cost: 1200,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Heavy Mace")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Heavy Mace)")){
+				weight += 5
+			}
+			weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Morningstar": {
 		purchasable: true,
@@ -99,7 +249,18 @@ const weaponData = {
 		cost: 800,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Morningstar")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Morningstar)")){
+				weight += 5
+			}
+			weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Shortspear": {
 		purchasable: true,
@@ -109,8 +270,19 @@ const weaponData = {
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true,
-		thrownWeapon: true
+		hasUniqueWeaponProficiency: true,
+		thrownWeapon: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Shortspear")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Shortspear)")){
+				weight += 5
+			}
+			weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Longspear": {
 		purchasable: true,
@@ -120,7 +292,18 @@ const weaponData = {
 		cost: 500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Club")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Longspear)")){
+				weight += 5
+			}
+			weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Quaterstaff": {
 		purchasable: true,
@@ -131,7 +314,21 @@ const weaponData = {
 		hasPurchaseCap: true,
 		purchaseCap: true,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Quaterstaff")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Quaterstaff)")){
+				weight += 5
+			}
+			if (characterInfo.features.includes("Flurry of Blows")){
+				weight += 5
+			}
+			weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Spear": {
 		purchasable: true,
@@ -141,8 +338,19 @@ const weaponData = {
 		cost: 200,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true,
-		thrownWeapon: true
+		hasUniqueWeaponProficiency: true,
+		thrownWeapon: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Spear")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Spear)")){
+				weight += 5
+			}
+			weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Heavy Crossbow": {
 		purchasable: true,
@@ -153,7 +361,30 @@ const weaponData = {
 		cost: 5000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Heavy Crossbow")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Heavy Crossbow)")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Point Blank Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Precise Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Rapid Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Rapid Reload (Heavy Crossbow)")){
+				weight += 5
+			}
+			weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Light Crossbow": {
 		purchasable: true,
@@ -164,7 +395,30 @@ const weaponData = {
 		cost: 3500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Light Crossbow")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Light Crossbow)")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Point Blank Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Precise Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Rapid Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Rapid Reload (Light Crossbow)")){
+				weight += 5
+			}
+			weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Dart": {
 		purchasable: true,
@@ -174,8 +428,34 @@ const weaponData = {
 		cost: 50,
 		hasPurchaseCap: false,
 		consumable: true,
-		hasUniqueWeaponProfiency: true,
-		thrownWeapon: true
+		hasUniqueWeaponProficiency: true,
+		thrownWeapon: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Javelin")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Javelin)")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Point Blank Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Precise Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Rapid Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Quick Draw")){
+				weight += 5
+			}
+			if (characterInfo.features.includes("+1 racial bonus on attack rolls with thrown weapons and slings")){
+				weight += 2
+			}
+			weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength))
+			return Math.max(weight, 1)
+		}
 	},
 	"Javelin": {
 		purchasable: true,
@@ -185,8 +465,34 @@ const weaponData = {
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: true,
-		hasUniqueWeaponProfiency: true,
-		thrownWeapon: true
+		hasUniqueWeaponProficiency: true,
+		thrownWeapon: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Light Crossbow")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Light Crossbow)")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Point Blank Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Precise Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Rapid Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Quick Draw")){
+				weight += 5
+			}
+			if (characterInfo.features.includes("+1 racial bonus on attack rolls with thrown weapons and slings")){
+				weight += 2
+			}
+			weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength))
+			return Math.max(weight, 1)
+		}
 	},
 	"Sling": {
 		purchasable: true,
@@ -198,7 +504,33 @@ const weaponData = {
 		hasPurchaseCap: true,
 		purchaseCap: 1,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Sling")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Sling)")){
+				weight += 5
+			}
+			if (characterInfo.featsKnown.includes("Point Blank Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Precise Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Rapid Shot")){
+				weight += 2
+			}
+			if (characterInfo.featsKnown.includes("Quick Draw")){
+				weight += 5
+			}
+			if (characterInfo.features.includes("+1 racial bonus on attack rolls with thrown weapons and slings")){
+				weight += 2
+			}
+			weight += (calculateModifier(characterInfo.dexterity) - calculateModifer(characterInfo.strength))
+			return Math.max(weight, 1)
+		}
 	},
 	"Throwing Axe": {
 		purchasable: true,
@@ -208,7 +540,18 @@ const weaponData = {
 		cost: 800,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Throwing Axe")){
+				return 1
+			}
+			let weight = 10
+			if (characterInfo.featsKnown.includes("Weapon Focus (Throwing Axe)")){
+				weight += 10
+			}
+			weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Light Hammer": {
 		purchasable: true,
@@ -218,8 +561,19 @@ const weaponData = {
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true,
-		thrownWeapon: true
+		hasUniqueWeaponProficiency: true,
+		thrownWeapon: true,
+		determineSelectionWeight: function(characterInfo){
+			if (!canUseWeapon(characterInfo, "Light Hammer")){
+				return 1
+			}
+			let weight = 5
+			if (characterInfo.featsKnown.includes("Weapon Focus (Light Hammer)")){
+				weight += 5
+			}
+			weight += (calculateModifier(characterInfo.strength) - calculateModifer(characterInfo.dexterity)) * 2
+			return Math.max(weight, 1)
+		}
 	},
 	"Handaxe": {
 		purchasable: true,
@@ -229,7 +583,7 @@ const weaponData = {
 		cost: 600,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Light Pick": {
 		purchasable: true,
@@ -239,7 +593,7 @@ const weaponData = {
 		cost: 400,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Sap": {
 		purchasable: true,
@@ -249,7 +603,7 @@ const weaponData = {
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Light Shield": {
 		purchasable: false,
@@ -257,7 +611,7 @@ const weaponData = {
 		subtype: "Light Melee Weapon",
 		hasAmmunition: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Spiked Armor": {
 		purchasable: false,
@@ -265,7 +619,7 @@ const weaponData = {
 		subtype: "Light Melee Weapon",
 		hasAmmunition: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Light Spiked Shield": {
 		purchasable: false,
@@ -273,7 +627,7 @@ const weaponData = {
 		subtype: "Light Melee Weapon",
 		hasAmmunition: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Short Sword": {
 		purchasable: true,
@@ -283,7 +637,7 @@ const weaponData = {
 		cost: 1000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Battleaxe": {
 		purchasable: true,
@@ -293,7 +647,7 @@ const weaponData = {
 		cost: 1000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Flail": {
 		purchasable: true,
@@ -303,7 +657,7 @@ const weaponData = {
 		cost: 800,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Longsword": {
 		purchasable: true,
@@ -313,7 +667,7 @@ const weaponData = {
 		cost: 1500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Heavy Pick": {
 		purchasable: true,
@@ -323,7 +677,7 @@ const weaponData = {
 		cost: 800,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Rapier": {
 		purchasable: true,
@@ -333,7 +687,7 @@ const weaponData = {
 		cost: 2000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Scimitar": {
 		purchasable: true,
@@ -343,7 +697,7 @@ const weaponData = {
 		cost: 1500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Heavy Shield": {
 		purchasable: false,
@@ -351,7 +705,7 @@ const weaponData = {
 		subtype: "One-Handed Melee Weapon",
 		hasAmmunition: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Heavy Spiked Shield": {
 		purchasable: false,
@@ -359,7 +713,7 @@ const weaponData = {
 		subtype: "One-Handed Melee Weapon",
 		hasAmmunition: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Trident": {
 		purchasable: true,
@@ -369,7 +723,7 @@ const weaponData = {
 		cost: 1500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true,
+		hasUniqueWeaponProficiency: true,
 		thrownWeapon: true
 	},
 	"Warhammer": {
@@ -380,7 +734,7 @@ const weaponData = {
 		cost: 1200,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Falchion": {
 		purchasable: true,
@@ -390,7 +744,7 @@ const weaponData = {
 		cost: 7500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Glaive": {
 		purchasable: true,
@@ -400,7 +754,7 @@ const weaponData = {
 		cost: 800,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Greataxe": {
 		purchasable: true,
@@ -410,7 +764,7 @@ const weaponData = {
 		cost: 2000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Greatclub": {
 		purchasable: true,
@@ -420,7 +774,7 @@ const weaponData = {
 		cost: 500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Heavy Flail": {
 		purchasable: true,
@@ -430,7 +784,7 @@ const weaponData = {
 		cost: 1500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Greatsword": {
 		purchasable: true,
@@ -440,7 +794,7 @@ const weaponData = {
 		cost: 5000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Guisarme": {
 		purchasable: true,
@@ -450,7 +804,7 @@ const weaponData = {
 		cost: 900,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Halberd": {
 		purchasable: true,
@@ -460,7 +814,7 @@ const weaponData = {
 		cost: 1000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Lance": {
 		purchasable: true,
@@ -470,7 +824,7 @@ const weaponData = {
 		cost: 1000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Ranseur": {
 		purchasable: true,
@@ -480,7 +834,7 @@ const weaponData = {
 		cost: 1000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Scythe": {
 		purchasable: true,
@@ -490,7 +844,7 @@ const weaponData = {
 		cost: 1800,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Longbow": {
 		purchasable: true,
@@ -501,7 +855,7 @@ const weaponData = {
 		cost: 7500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Composite Longbow": {
 		purchasable: true,
@@ -512,7 +866,7 @@ const weaponData = {
 		cost: 10000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: false,
+		hasUniqueWeaponProficiency: false,
 		sharedProfiencyWith: "Longbow"
 	},
 	"Shortbow": {
@@ -524,7 +878,7 @@ const weaponData = {
 		cost: 3000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Composite Shortbow": {
 		purchasable: true,
@@ -535,7 +889,7 @@ const weaponData = {
 		cost: 7500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: false,
+		hasUniqueWeaponProficiency: false,
 		sharedProfiencyWith: "Shortbow"
 	},
 	"Kama": {
@@ -546,7 +900,7 @@ const weaponData = {
 		cost: 200,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Nunchaku": {
 		purchasable: true,
@@ -556,7 +910,7 @@ const weaponData = {
 		cost: 200,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Sai": {
 		purchasable: true,
@@ -566,7 +920,7 @@ const weaponData = {
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Siangham": {
 		purchasable: true,
@@ -576,7 +930,7 @@ const weaponData = {
 		cost: 300,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Bastard Sword": {
 		purchasable: true,
@@ -586,7 +940,7 @@ const weaponData = {
 		cost: 3500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Dwarven Waraxe": {
 		purchasable: true,
@@ -596,7 +950,7 @@ const weaponData = {
 		cost: 3000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Whip": {
 		purchasable: true,
@@ -606,7 +960,7 @@ const weaponData = {
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true,
+		hasUniqueWeaponProficiency: true,
 	},
 	"Orc Double Axe": {
 		purchasable: true,
@@ -616,7 +970,7 @@ const weaponData = {
 		cost: 6000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Spiked Chain": {
 		purchasable: true,
@@ -626,7 +980,7 @@ const weaponData = {
 		cost: 2500,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Dire Flail": {
 		purchasable: true,
@@ -636,7 +990,7 @@ const weaponData = {
 		cost: 9000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Gnome Hooked Hammer": {
 		purchasable: true,
@@ -646,7 +1000,7 @@ const weaponData = {
 		cost: 2000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Two-Bladed Sword": {
 		purchasable: true,
@@ -656,7 +1010,7 @@ const weaponData = {
 		cost: 10000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Dwarven Urgrosh": {
 		purchasable: true,
@@ -666,7 +1020,7 @@ const weaponData = {
 		cost: 5000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true,
+		hasUniqueWeaponProficiency: true,
 	},
 	"Bolas": {
 		purchasable: true,
@@ -676,7 +1030,7 @@ const weaponData = {
 		cost: 500,
 		hasPurchaseCap: false,
 		consumable: true,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Hand Crossbow": {
 		purchasable: true,
@@ -687,7 +1041,7 @@ const weaponData = {
 		cost: 10000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Repeating Heavy Crossbow": {
 		purchasable: true,
@@ -698,7 +1052,7 @@ const weaponData = {
 		cost: 40000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Repeating Light Crossbow": {
 		purchasable: true,
@@ -709,7 +1063,7 @@ const weaponData = {
 		cost: 25000,
 		hasPurchaseCap: false,
 		consumable: false,
-		hasUniqueWeaponProfiency: true
+		hasUniqueWeaponProficiency: true
 	},
 	"Net": {
 		purchasable: true,
@@ -719,7 +1073,7 @@ const weaponData = {
 		cost: 2000,
 		hasPurchaseCap: false,
 		consumable: true,
-		hasUniqueWeaponProfiency: true,
+		hasUniqueWeaponProficiency: true,
 		thrownWeapon: true
 	},
 	"Shuriken": {
@@ -730,7 +1084,7 @@ const weaponData = {
 		cost: 100,
 		hasPurchaseCap: false,
 		consumable: true,
-		hasUniqueWeaponProfiency: true,
+		hasUniqueWeaponProficiency: true,
 		thrownWeapon: true
 	}
 }

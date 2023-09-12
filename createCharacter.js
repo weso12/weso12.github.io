@@ -13,11 +13,24 @@
 		}
 		var characterInfo = {};
 		//Choose your Class and Race
-		let ClassArray = Object.keys(classData)
+		let ClassArray = []
 		let RaceArray = []
 		for (var property in raceData){
 			if (raceData[property].sourcebook === "Player's Handbook"){
 				RaceArray.push(property)
+			}
+		}
+		for (var property in classData){
+			//Yes I am aware you can do this with only one if/else statement i just do two for cleaner code
+			if (classData[property].isNPCClass){
+				if (document.getElementById("allowNPCClasses").checked){
+					ClassArray.push(property)
+				}
+			}
+			else {
+				if (!document.getElementById("allowNPCClasses").checked || !document.getElementById("onlyNPCClasses").checked){
+					ClassArray.push(property)
+				}
 			}
 		}
 		characterInfo.class = ClassArray[Math.floor(Math.random() * ClassArray.length)]
@@ -215,6 +228,15 @@
 						}
 					}
 				}
+				if (skillData[property].hasSubskills && !characterInfo.classSkills.includes(property)){
+					for (var i = 0; i < skillData[property].subskills.length; i++){
+						if (characterInfo.classSkills.includes(property + " (" + skillData[property].subskills[i] + ")")){
+							for (var j = 0; j < parseInt(document.getElementById("classSkillWeight").value); j++){
+								skillRollArray.push(property + " (" + skillData[property].subskills[i] + ")")
+							}
+						}
+					}
+				}
 			}
 		}
 		if (document.getElementById("maxlevel1skillranks").checked){
@@ -275,7 +297,7 @@
 						}
 					}
 				}
-				else if (skillData[rollResults].hasSubskills){
+				else if (skillData[rollResults] && skillData[rollResults].hasSubskills){
 					let subskillArray = []
 					for (var i = 0; i < skillData[rollResults].subskills.length; i++){
 						if (document.getElementById("weighindividualskills").checked){
@@ -383,7 +405,7 @@
 						}
 					}
 				}
-				else if (skillData[rollResults].hasSubskills){
+				else if (skillData[rollResults] && skillData[rollResults].hasSubskills){
 					let subskillArray = []
 					for (var i = 0; i < skillData[rollResults].subskills.length; i++){
 						if ((!characterInfo.skillRanks[rollResults + " (" + skillData[rollResults].subskills[i] + ")"] || 
@@ -402,7 +424,7 @@
 					}
 					else {
 						let subskillRoll = subskillArray[Math.floor(Math.random() * subskillArray.length)]
-						if (!characterInfo.skillRanks[rollResults + " (" + skillData[rollResults].subskills[i] + ")"]){
+						if (!characterInfo.skillRanks[rollResults + " (" + subskillRoll + ")"]){
 							characterInfo.skillRanks[rollResults + " (" + subskillRoll + ")"] = 0.5
 						}
 						else {
@@ -857,10 +879,8 @@
 				let knowledgeCheckbox = document.createElement("INPUT")
 				knowledgeCheckbox.type = "checkbox"
 				knowledgeCheckbox.disabled = true
-				knowledgeCheckbox.id = "Knowlegde checkbox"
-				if (knowledgeClassSkillsNoRanksOrBonuses > knowledgeCrossClassSkillsNoRanksOrBonuses){
-					knowledgeCheckbox.checked = true
-				}
+				knowledgeCheckbox.id = "Knowledge checkbox"
+				knowledgeCheckbox.checked = (knowledgeClassSkillsNoRanksOrBonuses > knowledgeCrossClassSkillsNoRanksOrBonuses)
 				let knowledgeCheckboxCell = document.createElement("TD")
 				knowledgeCheckboxCell.appendChild(knowledgeCheckbox)
 				knowledgeCheckboxCell.style.border = "1px solid black"
@@ -982,7 +1002,8 @@
 				let subskillswithBonusOrRanks = 0
 				for (var i = 0; i < skillData[property].subskills.length; i++){
 					if ((characterInfo.skillRanks[property + " (" + skillData[property].subskills[i] + ")"] && characterInfo.skillRanks[property + " (" + skillData[property].subskills[i] + ")"] > 0) ||
-						characterInfo.skillBonuses[property + " (" + skillData[property].subskills[i] + ")"]){
+						characterInfo.skillBonuses[property + " (" + skillData[property].subskills[i] + ")"] ||
+						characterInfo.classSkills.includes(property + " (" + skillData[property].subskills[i] + ")")){
 						subskillswithBonusOrRanks++
 						let subskillRow = document.createElement("TR")
 						if ((!skillData[property].allowedUntrained && (!characterInfo.skillRanks[property + " (" + skillData[property].subskills[i] + ")"] || characterInfo.skillRanks[property + " (" + skillData[property].subskills[i] + ")"] < 1)) || (property === "Craft" && skillData[property].subskills[i] === "Alchemy" && !classData[characterInfo.class].fullCaster)){
@@ -992,9 +1013,7 @@
 						subSkillcheckbox.type = "checkbox"
 						subSkillcheckbox.disabled = true
 						subSkillcheckbox.id = property + " (" + skillData[property].subskills[i] + ") checkbox"
-						if (characterInfo.classSkills.includes(property)){
-							subSkillcheckbox.checked = true
-						}
+						subSkillcheckbox.checked = (characterInfo.classSkills.includes(property) || characterInfo.classSkills.includes(property + " (" + skillData[property].subskills[i] + ")"))
 						let classsubSkillCheckboxCell = document.createElement("TD")
 						classsubSkillCheckboxCell.appendChild(subSkillcheckbox)
 						classsubSkillCheckboxCell.style.border = "1px solid black"

@@ -5,6 +5,7 @@
 			trainingAge: "Easy",
 			fullCaster: false,
 			halfCaster: false,
+			isNPCClass: false,
 			classSkills: ["Climb", "Craft", "Handle Animal", "Intimidate", "Jump", "Listen", "Ride", "Survival", "Swim"],
 			weaponProficiency: {
 				allSimple: true,
@@ -68,6 +69,7 @@
 			castingType: "Arcane",
 			spellsAlignmentRestricted: false,
 			knowsAllSpells: false,
+			isNPCClass: false,
 			castingAttribute: "Charisma",
 			classSkills: ["Appraise", "Balance", "Bluff", "Climb", "Concentration", "Craft", "Decipher Script", "Diplomacy", 
 			"Escape Artist", "Gather Information", "Hide", "Jump", "Knowledge (Arcana)", "Knowledge (Architecture and Engineering)", 
@@ -172,6 +174,7 @@
 			trainingAge: "Hard",
 			spellsAlignmentRestricted: true,
 			knowsAllSpells: true,
+			isNPCClass: false,
 			castingAttribute: "Wisdom",
 			classSkills: ["Concentration", "Craft", "Diplomacy", "Heal", "Knowledge (Arcana)", "Knowledge (History)",
 			"Knowledge (Religion)", "Knowledge (The Planes)", "Profession", "Spellcraft"],
@@ -367,6 +370,7 @@
 			trainingAge: "Hard",
 			spellsAlignmentRestricted: true,
 			knowsAllSpells: true,
+			isNPCClass: false,
 			castingAttribute: "Wisdom",
 			classSkills: ["Concentration", "Craft", "Diplomacy", "Handle Animal", "Heal", "Knowledge (Nature)", "Listen", "Profession",
 			 "Ride", "Spellcraft", "Spot", "Survival", "Swim"],
@@ -548,6 +552,7 @@
 			trainingAge: "Medium",
 			fullCaster: false,
 			halfCaster: false,
+			isNPCClass: false,
 			weaponProficiency: {
 				allSimple: true,
 				allMartial: true
@@ -613,6 +618,7 @@
 			trainingAge: "Hard",
 			fullCaster: false,
 			halfCaster: false,
+			isNPCClass: false,
 			classSkills: ["Balance", "Climb", "Concentration", "Craft", "Diplomacy", "Escape Artist", "Hide", "Jump", 
 			"Knowledge (Arcana)", "Knowledge (Religion)", "Listen", "Move Silently", "Perform", "Profession", "Sense Motive", "Spot", 
 			"Swim", "Tumble"],
@@ -657,7 +663,7 @@
 				null,
 				function (characterInfo) {
 					characterInfo.features.push("AC Bonus")
-					characterInfo.features.push("Flury of Blows")
+					characterInfo.features.push("Flurry of Blows")
 					characterInfo.features.push("Unarmed Strike")
 					addFeat(characterInfo, "Improved Unarmed Strike")
 					if (document.getElementById("weighfeats").checked){
@@ -708,6 +714,7 @@
 			trainingAge: "Medium",
 			fullCaster: false,
 			halfCaster: true,
+			isNPCClass: false,
 			castingType: "Divine",
 			spellsAlignmentRestricted: false,
 			knowsAllSpells: true,
@@ -771,6 +778,7 @@
 			trainingAge: "Medium",
 			fullCaster: false,
 			halfCaster: true,
+			isNPCClass: false,
 			castingType: "Divine",
 			spellsAlignmentRestricted: false,
 			knowsAllSpells: true,
@@ -840,6 +848,7 @@
 			trainingAge: "Easy",
 			fullCaster: false,
 			halfCaster: false,
+			isNPCClass: false,
 			classSkills: ["Appraise", "Balance", "Bluff", "Climb", "Craft", "Decipher Script", "Diplomacy", "Disable Device", "Disguise", 
 			"Escape Artist", "Forgery", "Gather Information", "Hide", "Intimidate", "Jump", "Knowledge (Local)", "Listen", "Move Silently", 
 			"Open Lock", "Perform", "Profession", "Search", "Sense Motive", "Sleight of Hand", "Spot", "Swim", "Tumble", "Use Magic Device", 
@@ -913,6 +922,7 @@
 			castingType: "Arcane",
 			spellsAlignmentRestricted: false,
 			knowsAllSpells: false,
+			isNPCClass: false,
 			castingAttribute: "Charisma",
 			classSkills: ["Bluff", "Concentration", "Craft", "Knowledge (Arcana)", "Profession", "Spellcraft"],
 			spellList: [
@@ -999,6 +1009,7 @@
 			trainingAge: "Hard",
 			spellsAlignmentRestricted: false,
 			knowsAllSpells: false,
+			isNPCClass: false,
 			castingAttribute: "Intelligence",
 			classSkills: ["Concentration", "Craft", "Decipher Script", "Knowledge (Arcana)", "Knowledge (Architecture and Engineering)",
 			"Knowledge (Dungeoneering)", "Knowledge (Geography)", "Knowledge (History)", "Knowledge (Local)", "Knowledge (Nature)",
@@ -1113,6 +1124,291 @@
 					weight += 2
 				}
 				return Math.max(weight, 1)
+			}
+		},
+		"Adept": {
+			hitDie: 6,
+			skillPoints: 2,
+			fullCaster: true,
+			castingAttribute: "Wisdom",
+			trainingAge: "Easy",
+			spellsAlignmentRestricted: false,
+			knowsAllSpells: true,
+			isNPCClass: true,
+			castingType: "Divine",
+			classSkills: ["Concentration", "Craft", "Handle Animal", "Heal", "Knowledge (Arcana)", "Knowledge (Architecture and Engineering)", 
+			"Knowledge (Dungeoneering)", "Knowledge (Geography)", "Knowledge (History)", "Knowledge (Local)", "Knowledge (Nature)",
+			"Knowledge (Nobility and Royalty)", "Knowledge (Religion)", "Knowledge (The Planes)", "Profession", "Spellcraft", "Survival"],
+			spellList: [["Create Water", "Cure Minor Wounds", "Detect Magic", "Ghost Sound", "Guidance", "Light", "Mending", "Purify Food and Drink",
+				"Read Magic", "Touch of Fatigue"],
+			["Bless", "Burning Hands", "Cause Fear", "Command", "Comprehend Languages", "Cure Light Wounds", "Detect Chaos", "Detect Evil", "Detect Good",
+				"Detect Law", "Endure Elements", "Obscuring Mist", "Protection from Chaos", "Protection from Evil", "Protection from Good", "Protection from Law", "Sleep"]],
+			weaponProficiency: {
+				allSimple: true
+			},
+			armorProficiency: {
+				lightArmor: false,
+				mediumArmor: false,
+				heavyArmor: false,
+				shields: false,
+				towerShields: false
+			},
+			baseAttackBonus: "Poor",
+			fortitudeSave: "Poor",
+			reflexSave: "Poor",
+			willSave: "Good",
+			hasAlignmentRestrictions: false,
+			attributeWeights: {
+				strength: 1,
+				dexterity: 4,
+				constitution: 6,
+				intelligence: 1,
+				wisdom: 48,
+				charisma: 4
+			},
+			assignClassFeatures: [
+				null,
+				function(characterInfo){
+					if (characterInfo.wisdom >= 10){
+						if (!characterInfo.spells){
+							characterInfo.spells = {}
+						}
+						characterInfo.spells["Adept"] = []
+						characterInfo.spells["Adept"].push([])
+						for (var i = 0; i < classData["Adept"].spellList[0].length; i++){
+							characterInfo.spells["Adept"][0].push(classData["Adept"].spellList[0][i])
+							if (!characterInfo.rawSpellsKnown.includes(classData["Adept"].spellList[0][i])){
+								characterInfo.rawSpellsKnown.push(classData["Adept"].spellList[0][i])
+							}
+						}
+						if (characterInfo.wisdom >= 11){
+							characterInfo.spells["Adept"].push([])
+							for (var i = 0; i < classData["Adept"].spellList[1].length; i++){
+								characterInfo.spells["Adept"][1].push(classData["Adept"].spellList[1][i])
+								if (!characterInfo.rawSpellsKnown.includes(classData["Adept"].spellList[1][i])){
+									characterInfo.rawSpellsKnown.push(classData["Adept"].spellList[1][i])
+								}
+							}
+						}
+					}
+				}
+			],
+			spellsPerDay: [
+				null,
+				[3, 1, null, null, null, null]
+			],
+			generateMoney: function(){
+				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + 2) * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5
+				weight += race.attributeMods.Wisdom
+				return weight
+			}
+		},
+		"Aristocrat": {
+			hitDie: 8,
+			skillPoints: 4,
+			fullCaster: false,
+			trainingAge: "Easy",
+			isNPCClass: true,
+			classSkills: ["Appraise", "Bluff", "Diplomacy", "Disguise", "Forgery", "Gather Information", "Handle Animal", "Intimidate",
+			"Knowledge (Arcana)", "Knowledge (Architecture and Engineering)", 
+			"Knowledge (Dungeoneering)", "Knowledge (Geography)", "Knowledge (History)", "Knowledge (Local)", "Knowledge (Nature)",
+			"Knowledge (Nobility and Royalty)", "Knowledge (Religion)", "Knowledge (The Planes)", "Listen", "Perform", "Ride", "Sense Motive",
+			"Speak Languages", "Spot", "Swim", "Survival"],
+			weaponProficiency: {
+				allSimple: true,
+				allMartial: true
+			},
+			armorProficiency: {
+				lightArmor: true,
+				mediumArmor: true,
+				heavyArmor: true,
+				shields: true,
+				towerShields: false
+			},
+			baseAttackBonus: "Medium",
+			fortitudeSave: "Poor",
+			reflexSave: "Poor",
+			willSave: "Good",
+			hasAlignmentRestrictions: false,
+			attributeWeights: {
+				strength: 1,
+				dexterity: 1,
+				constitution: 1,
+				intelligence: 1,
+				wisdom: 1,
+				charisma: 1
+			},
+			assignClassFeatures: [
+				null,
+				function(characterInfo){
+					return
+				}
+			],
+			generateMoney: function(){
+				return (Math.floor(Math.random() * 8) + Math.floor(Math.random() * 8) + Math.floor(Math.random() * 8) + Math.floor(Math.random() * 8) + Math.floor(Math.random() * 8) + Math.floor(Math.random() * 8) + 6) * 1000
+			},
+			determineRacialWeight: function(race){
+				let weight = 5
+				if (characterInfo.race === "Half-Orc"){
+					weight -= 2
+				}
+				return weight
+			}
+		},
+		"Commoner": {
+			hitDie: 4,
+			skillPoints: 2,
+			fullCaster: false,
+			halfCaster: false,
+			trainingAge: "Easy",
+			isNPCClass: true,
+			classSkills: ["Climb", "Craft", "Handle Animal", "Jump", "Listen", "Profession", "Ride", "Spot", "Swim", "Use Rope"],
+			weaponProficiency: {},
+			armorProficiency: {
+				lightArmor: false,
+				mediumArmor: false,
+				heavyArmor: false,
+				shields: false,
+				towerShields: false
+			},
+			baseAttackBonus: "Poor",
+			fortitudeSave: "Poor",
+			reflexSave: "Poor",
+			willSave: "Poor",
+			hasAlignmentRestrictions: false,
+			attributeWeights: {
+				strength: 1,
+				dexterity: 1,
+				constitution: 1,
+				intelligence: 1,
+				wisdom: 1,
+				charisma: 1
+			},
+			assignClassFeatures: [
+				null,
+				function(characterInfo){
+					let weaponArray = []
+					for (var property in weaponData){
+						if (weaponData[property].proficiencyType === "Simple"){
+							weaponArray.push(property)
+						}
+					}
+					return weaponArray[Math.floor(Math.random() * weaponArray.length)]
+				}
+			],
+			determineRacialWeight: function(characterInfo){
+				return 1
+			},
+			generateMoney: function(characterInfo){
+				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + 5)*100
+			}
+		},
+		"Expert": {
+			hitDie: 6,
+			skillPoints: 6,
+			fullCaster: false,
+			halfCaster: false,
+			trainingAge: "Medium",
+			isNPCClass: true,
+			classSkills: [],
+			baseAttackBonus: "Medium",
+			fortitudeSave: "Poor",
+			reflexSave: "Poor",
+			willSave: "Good",
+			weaponProficiency: {
+				allSimple: true
+			},
+			armorProficiency: {
+				lightArmor: true,
+				mediumArmor: false,
+				heavyArmor: false,
+				shields: false,
+				towerShields: false
+			},
+			hasAlignmentRestrictions: false,
+			attributeWeights: {
+				strength: 1,
+				dexterity: 5,
+				constitution: 5,
+				intelligence: 20,
+				wisdom: 3,
+				charisma: 1
+			},
+			assignClassFeatures: [
+				null,
+				function(characterInfo){
+					let skillArray = []
+					for (var property in skillData){
+						if (skillData[property].subskills){
+							for (var i = 0; i < skillData[property].subskills.length; i++){
+								if (property !== "Craft" || skillData[property].subskills[i] !== "Alchemy" || !document.getElementById("basicfiltering").checked){
+									skillArray.push(property + " (" + skillData[property].subskills[i] + ")")
+								}
+							}
+						}
+						else {
+							skillArray.push(property)
+						}
+					}
+					for (var i = 0; i < 10; i++){
+						characterInfo.classSkills.push(skillArray.splice(Math.floor(Math.random() * skillArray.length), 1)[0])
+					}
+				}
+			],
+			determineRacialWeight: function(race){
+				return 1
+			},
+			generateMoney: function(){
+				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + 3) * 1000
+			}
+		},
+		"Warrior": {
+			hitDie: 8,
+			skillPoints: 2,
+			fullCaster: false,
+			halfCaster: false,
+			trainingAge: "Easy",
+			isNPCClass: true,
+			classSkills: ["Climb", "Handle Animal", "Intimidate", "Jump", "Ride", "Swim"],
+			weaponProficiency: {
+				allSimple: false,
+				allMartial: false
+			},
+			hasAlignmentRestrictions: false,
+			attributeWeights: {
+				strength: 50,
+				dexterity: 20,
+				constitution: 20,
+				wisdom: 4,
+				intelligence: 3,
+				charisma: 3
+			},
+			baseAttackBonus: "Good",
+			fortitudeSave: "Good",
+			reflexSave: "Poor",
+			willSave: "Poor",
+			armorProficiency: {
+				lightArmor: true,
+				mediumArmor: true,
+				heavyArmor: true,
+				shields: true,
+				towerShields: false
+			},
+			assignClassFeatures: [
+				null,
+				function (characterInfo) {
+					return
+				}
+			],
+			determineRacialWeight: function(race){
+				let weight = 5 + calculateModifier(raceData[race].attributeMods.Strength) + Math.floor(calculateModifier(raceData[race].attributeMods.Constitution)/2)
+				return Math.max(weight, 1)
+			},
+			generateMoney: function(){
+				return (Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + Math.floor(Math.random() * 4) + 3) * 1000
 			}
 		}
 	}
