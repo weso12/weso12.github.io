@@ -212,6 +212,15 @@
 						}
 					}
 				}
+				if (skillData[property].hasSubskills && !characterInfo.classSkills.includes(property)){
+					for (var i = 0; i < skillData[property].subskills.length; i++){
+						if (characterInfo.classSkills.includes(property + " (" + skillData[property].subskills[i] + ")")){
+							for (var j = 0; j < parseInt(document.getElementById("classSkillWeight").value * skillData[property].determineWeight(characterInfo)); j++){
+								skillRollArray.push(property + " (" + skillData[property].subskills[i] + ")")
+							}
+						}
+					}
+				}
 			}
 		}
 		else {
@@ -326,7 +335,7 @@
 						}
 					}
 					let subskillRoll = subskillArray[Math.floor(Math.random() * subskillArray.length)]
-					if (characterInfo.skillPoints < 4 && characterInfo.classSkills.includes(rollResults)){
+					if (characterInfo.skillPoints < 4 && (characterInfo.classSkills.includes(rollResults) || characterInfo.classSkills.includes(rollResults + " (" + subskillRoll + ")"))){
 						characterInfo.skillRanks[rollResults + " (" + subskillRoll + ")"] = characterInfo.skillPoints
 						characterInfo.skillPoints = 0
 					}
@@ -334,7 +343,7 @@
 						characterInfo.skillRanks[rollResults + " (" + subskillRoll + ")"] = characterInfo.skillPoints/2;
 						characterInfo.skillPoints = 0
 					}
-					else if (characterInfo.classSkills.includes(rollResults)){
+					else if (characterInfo.classSkills.includes(rollResults) || characterInfo.classSkills.includes(rollResults + " (" + subskillRoll + ")")){
 						characterInfo.skillRanks[rollResults + " (" + subskillRoll + ")"] = 4;
 						characterInfo.skillPoints -= 4;
 					}
